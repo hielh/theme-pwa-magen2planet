@@ -1,0 +1,28 @@
+.features {
+    composes: grid from global;
+    composes: justify-between from global;
+    composes: items-center from global;
+    composes: py-14 from global;
+    composes: md_divide-x from global;
+    composes: divide-light-blue-400 from global;
+    composes: grid-cols-2 from global;
+    composes: md_grid-cols-4 from global;
+    composes: md_gap-x-10 from global;
+    margin-bottom: -20px;
+}
+.featuresItem {
+    composes: flex from global;
+    composes: flex-col from global;
+    composes: md_flex-row from global;
+    composes: flex-1 from global;
+    composes: items-center from global;
+    composes: justify-center from global;
+    composes: gap-x-6 from global;
+    /* composes: max-h-14 from global; */
+    composes: text-center from global;
+    composes: md_text-left from global;
+}
+.grey {
+    composes: text-gray-500 from global;
+    font-size: 14px;
+}

@@ -1,0 +1,124 @@
+.DealsContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .deals, .bestsellers {
+    width: 48%;
+  }
+  
+  .dealsH2, .bestsellersH2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .DealsImages {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .DealsImg {
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+  }
+  
+  .selectedDeal {
+    border: 2px solid lime;
+  }
+  
+  .dealMainImage {
+    position: relative;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .dealMainImageImg {
+    width: 100%;
+  }
+  
+  .dealDiscount {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: lime;
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+  }
+  
+  .detailsH3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .dealPrice {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .dealCurrentPrice {
+    color: red;
+    font-size: 1.5rem;
+    margin-right: 10px;
+  }
+  
+  .dealOriginalPrice {
+    text-decoration: line-through;
+    color: grey;
+  }
+  
+  .dealRating {
+    margin-bottom: 10px;
+  }
+  
+  .dealStock {
+    margin-bottom: 10px;
+  }
+  
+  .dealProgressBar {
+    background: lightgrey;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+  
+  .dealProgress {
+    width: 6%;
+    height: 10px;
+    background: lime;
+  }
+  
+  .dealSold {
+    color: grey;
+  }
+  
+  .bestsellersUl {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .bestsellersLi {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .bestsellersImg {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .dealDiscountedPrice {
+    color: red;
+  }
+  
+  .dealDriginalPrice {
+    text-decoration: line-through;
+    color: grey;
+    margin-left: 5px;
+  }
+  

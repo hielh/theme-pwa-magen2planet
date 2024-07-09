@@ -1,0 +1,205 @@
+/* ####################### the products styles ########################### */
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.15);
+}
+
+.headerH2 {
+    font-size: 24px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.navList {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navListLi {
+    margin-left: 20px;
+    max-width: fit-content;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.headerH2:hover,
+.navListLi:hover {
+    color: #5fa30f;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.card {
+    background: white;
+    position: relative;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.2s;
+}
+
+.productDiscount {
+    background-color: rgb(255, 98, 0);
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 5px;
+    z-index: 200;
+}
+
+.image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.01s;
+}
+
+.image:hover {
+    transform: rotateY(180deg);
+}
+
+.details {
+    padding: 16px;
+    text-align: left;
+    z-index: 5;
+}
+
+.name {
+    font-size: 0.875rem;
+    margin: 8px 0;
+    color: #06c;
+    composes: hover_text-green2 from global;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+}
+
+.price {
+    font-size: 1.125rem;
+    margin-top: 8px;
+}
+
+.button {
+    padding: 8px 16px;
+    composes: hover_bg-green2 from global;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #3d6e09;
+}
+
+
+.icons {
+    position: absolute;
+    bottom: -30px; /* Adjust this value to the height of the icons container  Eye, Heart, BarChart, ShoppingCart*/
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    transition: bottom 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 0;
+    background: white;
+    z-index: 1;
+}
+
+.imageHolder {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card:hover .icons {
+    opacity: 1;
+    bottom: 0px; /* Adjust this value to the desired distance from the image */
+}
+
+.iconsBackground {
+    position: relative;
+    display: block;
+    padding: 10px;
+    composes: hover_bg-green2 from global;
+    composes: hover_rounded-full from global;
+}
+
+.iconsBackground:hover {
+    border-radius: 50%;
+    color: white !important;
+    cursor: pointer;
+}
+
+.iconsBackground::before {
+    content: '';
+    position: absolute;
+    bottom: 120%; /* Adjust this value to position the triangle */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-top: 15px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s, bottom 0.3s ease-in-out;
+    z-index: 1;
+}
+
+.iconsBackground::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 150%; /* Position above the icon */
+    left: -50%;
+    z-index: 10;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    white-space: nowrap;
+    font-size: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, bottom 0.3s ease-in-out;
+}
+
+.iconsBackground:hover::before {
+    bottom: 90%;
+}
+.iconsBackground:hover::after {
+    bottom: 120%;
+}
+
+.iconsBackground:hover::before,
+.iconsBackground:hover::after {
+    opacity: 1;
+    visibility: visible;
+}

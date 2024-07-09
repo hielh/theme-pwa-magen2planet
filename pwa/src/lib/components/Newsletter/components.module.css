@@ -1,0 +1,4 @@
+.overrideButton{
+    composes: px-5 py-5 from global;
+    composes: bg-red-300 from global;
+}

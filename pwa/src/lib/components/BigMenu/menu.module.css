@@ -1,0 +1,147 @@
+.departement {
+    position: relative;
+    cursor: pointer;
+    flex-basis: 300px;
+    height: 48px;
+    display: none;
+}
+
+.departement:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    z-index: 20;
+    width: 100%;
+    height: 2px;
+    background-color: #5fa30f;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.departementList {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 10;
+    background-color: white;
+    width: 100%;
+}
+
+.departementListItem {
+    composes: hover_text-green2 from global;
+    padding: 0 10px;
+    cursor: pointer;
+    height: 48px;
+}
+
+.departement:hover .departementList {
+    display: block;
+}
+
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    font-weight: bold;
+}
+
+.menuContainer {
+    position: relative;
+    /* width: 100%; */
+}
+
+.menuItems {
+    display: flex;
+    flex-wrap: wrap;
+    cursor: pointer;
+    height: 48px;
+}
+
+@media screen and (max-width: 959px) {
+    .menuItems {
+        display: none;
+    }
+    .departement {
+        display: none;
+    }
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+}
+
+.menuItemSpan {
+    composes: hover_text-green2 from global;
+    display: flex;
+    align-items: center;
+}
+
+.menuContainer.hovered::before {
+    content: '';
+    position: absolute;
+    background: rgba(0,0,0,.5);
+    top: 100% ;
+    right: 0;
+    z-index: 10;
+    bottom: 0;
+    pointer-events: none;
+    width: 100vw;
+    height: 10000%;
+}
+
+.menuItem:hover .submenuItems{
+    display: block;
+}
+
+@keyframes slideUp {
+    from {
+        top: calc(100% + 10px);
+    }
+    to {
+        top: calc(100% + 0px);
+    }
+  }
+
+.submenuItems {
+    display: none;
+    position: absolute;
+    background: white;
+    z-index: 11;
+    top: calc(100% + 0px);
+    transition: top 1s;
+    left: 0;
+    width: 200px;
+    animation: slideUp 0.15s ease-in-out;
+}
+
+.submenuItem {
+    padding: 0px 20px;
+    composes: hover_text-green2 from global;
+}
+
+.submenuItem::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #e5e5e5;
+    margin: 8px 0;
+}
+
+.departement {
+    display: flex;
+    align-items: center;
+}
+
+.phone {
+    display: flex;
+}

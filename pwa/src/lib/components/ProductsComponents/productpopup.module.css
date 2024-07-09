@@ -1,0 +1,259 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @media (max-width: 960px) {
+    .overlay {
+      /* align-items: center; */
+      /* overflow-y: scroll; */
+      /* height: unset; */
+      /* height: fit-content; */
+      overflow-y: scroll;
+      /* max-height: fit-content; */
+    }
+    .mianPopup {
+      /* height: unset; */
+      /* margin-top: 20px; */
+      top: 360px;
+    }
+    .overlay::-webkit-scrollbar {
+      display: none;
+  }
+  }
+
+  
+
+  @keyframes zoom-in {
+    0% {
+      transform: scale(0.5, 0.5);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  .mianPopup {
+    background: white;
+    position: relative;
+    width: 90%;
+    max-width: 1150px;
+    min-height: 750px;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    animation: zoom-in 0.5s ease-in-out;
+  }
+
+  .sidebarHeaders {
+    font-weight: 700;
+  }
+
+  .closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-80px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateY(80px);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+  
+  .header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  .body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 20px;
+  }
+  
+  .image {
+    max-height: 400px;
+    flex: 1 1 250px;
+    overflow: hidden;
+    /* width: 35%; */
+    position: relative;
+  }
+  
+  .details {
+    display: flex;
+    flex: 1 1 350px;
+    flex-direction: column;
+    /* width: 40%; */
+  }
+
+  .sidebar {
+    /* width: 25%; */
+    flex: 1 1 150px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    height: fit-content;
+  }
+
+  .sku {
+    color: #999;
+    margin-left: 10px;
+  }
+
+  .headerTitle {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+
+  .minus {
+    background-color: #f30;
+    z-index: 8;
+    color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .price {
+    color: #f30;
+    font-size: 25px;
+    font-weight: 700;
+  }
+
+  .Quantity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+    width: 120px;
+    border: 1px solid #e1e1e1;
+    position: relative;
+  }
+
+  .Quantity::before {
+    content: 'Quantity:';
+    border-radius: 50%;
+    font-size: 12px;
+    color: #666;
+    position: absolute;
+    top: -20px;
+    left: 0;
+  }
+
+  .reduceQuantity, .increaseQuantity {
+    font-size: 20px;
+    box-sizing: border-box;
+  }
+
+  .status {
+    color: #5fa30f;
+    padding: 15px 0;
+  }
+
+  .detailsLink {
+    margin-left: auto;
+    padding: 15px 0;
+    color: #09c;
+  }
+  
+  .imageImg {
+    max-width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .cartDesc {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e1e1e1;
+  }
+  
+  .actions {
+    grid-area: actions;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .addToCart {
+    background: #5fa30f;
+    color: white;
+    border: none;
+    padding: 15px 60px;
+    cursor: pointer;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  .methods {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .method {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .methodIcon {
+    margin-right: 10px;
+    color: #5fa30f;
+  }
+
+  .links {
+    padding-top: 10px;
+    color: #09c;
+  }
+  

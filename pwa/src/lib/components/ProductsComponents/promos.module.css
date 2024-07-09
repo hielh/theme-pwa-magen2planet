@@ -1,0 +1,69 @@
+.promoSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    margin: 40px 0;
+}
+
+.promoItem {
+    position: relative;
+    width: 48%;
+    flex-basis: 600px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.promoImage {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.promoContent {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 20px;
+    width: 250px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.promoContentH2 {
+    margin: 0 0 10px;
+    font-size: 1.5em;
+    line-height: normal;
+}
+
+.promoContent p {
+    margin: 0 0 10px;
+    font-size: 1.2em;
+}
+
+.promoContentPrice {
+    color: #5fa30f;
+    font-weight: bold;
+}
+
+.salePrice {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.shopNowButton {
+    background-color: #5fa30f;
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ;
+}
+
+.shopNowButton:hover {
+    background: #427b01;
+}  
