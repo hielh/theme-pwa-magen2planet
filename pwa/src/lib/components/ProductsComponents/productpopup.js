@@ -1,13 +1,116 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styles from './productpopup.module.css';
 import { Heart, Share, RefreshCcw, CreditCard, MessageCircle, X, Star, Facebook, Twitter, Linkedin } from 'react-feather';
 import ImageZoom from './imagezoom';
+import { useProduct } from '@magento/peregrine/lib/talons/CartPage/ProductListing/useProduct';
+import { useMutation, useQuery, gql } from '@apollo/client';
+import { useCartContext } from '@magento/peregrine/lib/context/cart';
+import { CartPageFragment } from '@magento/peregrine/lib/talons/CartPage/cartPageFragments.gql.js';
+import { AvailableShippingMethodsCartFragment } from '@magento/peregrine/lib/talons/CartPage/PriceAdjustments/ShippingMethods/shippingMethodsFragments.gql.js';
+import ProductObject from '../TextInput/fileJSobject';
+import { useEventingContext } from '@magento/peregrine/lib/context/eventing'
 
-const ProductPopup = ({ product, onClose }) => {
+const ProductPopup = (props) => {
 
-    const [productId, setProductId] = useState(1);
-    const  handleChange = () => {
-        setProductId(2);
+    const [productQuantity, setProductQuantity] = useState(0);
+    const [disabledMinusQuantity, setDisabledMinusQuantity] = useState(false);
+    const [isUpdatingCart, setIsUpdatingCart] = useState(false);
+
+    const { 
+         product,
+         onClose,
+         storeConfig,
+         selectedProduct,
+         setActiveEditItem,
+         setIsCartUpdating,
+         onAddToWishlistSuccess,
+         fetchCartDetails,
+         wishlistConfig,
+         handleAddToCart,
+         cartItems,
+         isDisabled
+    } = props;
+
+    
+    useEffect(() => {
+        if(cartItems.length > 0) {
+            let itemExist = cartItems.find(cartItem => cartItem.product.uid === product.uid);
+            if(itemExist != undefined) {
+                setProductQuantity(itemExist.quantity);
+            } else {
+                setProductQuantity(0);
+            }
+        }
+    }, [])
+
+    const [{ cartId }] = useCartContext();
+    const [, { dispatch }] = useEventingContext();
+
+    const handleAddToCartFunctionnality = ()=> {
+        if(getCartItem() !=undefined){
+            handleUpdateItemQuantity()
+        }
+        else{
+            handleAddToCart()
+        }
+    }
+
+    const [
+        updateItemQuantity,
+        {
+            loading: updateItemLoading,
+            error: updateError,
+            called: updateItemCalled
+        }
+    ] = useMutation(UPDATE_QUANTITY_MUTATION);
+
+    const handleUpdateItemQuantity = useCallback(
+        async quantity => {
+            try {
+                setIsUpdatingCart(true);
+                await updateItemQuantity({
+                    variables: {
+                        cartId,
+                        itemId: getCartItem().uid,
+                        quantity: productQuantity
+                    }
+                });
+
+                setIsUpdatingCart(false);
+
+                const selectedOptions = null; // just pour le moment
+            } catch (err) {
+                // Make sure any errors from the mutation are displayed.
+            }
+        },
+        [cartId, dispatch, product, updateItemQuantity, productQuantity]
+    );
+
+    const handleRaiseQuantity = () => {
+        setProductQuantity(productQuantity + 1);
+        setDisabledMinusQuantity(false);
+    }
+
+    const handleLowerQuantity = () => {
+        if(productQuantity > 1) {
+            setProductQuantity(productQuantity - 1);
+            setDisabledMinusQuantity(false);
+        }
+        else {
+            setDisabledMinusQuantity(true);
+            setProductQuantity(0);
+        }
+    }
+
+    function getCartItem() {
+        if (cartItems.length > 0) {
+            let item = cartItems.find(item => item.product.uid === product.uid);
+            if (item) {
+                return item;
+            }
+            return undefined;
+          }
+        return undefined;
     }
 
     const closeProductPopup = (e) => {
@@ -57,11 +160,30 @@ const ProductPopup = ({ product, onClose }) => {
                     <a href='#' className={styles.detailsLink}>see details...</a>
                     <div className={styles.cartDesc}>
                         <div className={styles.Quantity}>
-                            <div  className={styles.reduceQuantity}>-</div>
-                            <input className='test' style={{maxWidth: '20px', border: 'none'}} onChange={handleChange} type='text' value={productId}></input>
-                            <div  className={styles.increaseQuantity}>+</div>
+                            <button  
+                                className={styles.reduceQuantity}
+                                onClick={handleLowerQuantity}
+                                disabled={disabledMinusQuantity}
+                                style={{cursor: disabledMinusQuantity ? 'not-allowed' : 'pointer'}}
+                            >-</button>
+                                <input 
+                                    className='test' 
+                                    style={{maxWidth: '20px', border: 'none'}} 
+                                    type='text'
+                                    value={productQuantity}
+                                    onChange={(e)=>{setProductQuantity(e.target.value)}}
+                                >
+                                </input>
+                            <button  
+                                className={styles.increaseQuantity}
+                                onClick={handleRaiseQuantity}
+                                disabled={isDisabled}
+                            >+</button>
                         </div>
-                        <button className={styles.addToCart}>Add To Cart</button>
+                        <button className={styles.addToCart}
+                                onClick={handleAddToCartFunctionnality}
+                                style={{backgroundColor: isDisabled ? 'grey' : '', cursor: isDisabled ? 'not-allowed' : 'pointer'}}
+                        > { isUpdatingCart ? 'Adding...' : 'Add To Cart' } </button>
                         <p>
                             <Heart size={30} strokeWidth={1}/>
                         </p>
@@ -115,3 +237,42 @@ const ProductPopup = ({ product, onClose }) => {
 };
 
 export default ProductPopup;
+
+export const REMOVE_ITEM_MUTATION = gql`
+    mutation removeItem($cartId: String!, $itemId: ID!) {
+        removeItemFromCart(
+            input: { cart_id: $cartId, cart_item_uid: $itemId }
+        ) {
+            cart {
+                id
+                ...CartPageFragment
+                ...AvailableShippingMethodsCartFragment
+            }
+        }
+    }
+    ${CartPageFragment}
+    ${AvailableShippingMethodsCartFragment}
+`;
+
+export const UPDATE_QUANTITY_MUTATION = gql`
+    mutation updateItemQuantity(
+        $cartId: String!
+        $itemId: ID!
+        $quantity: Float!
+    ) {
+        updateCartItems(
+            input: {
+                cart_id: $cartId
+                cart_items: [{ cart_item_uid: $itemId, quantity: $quantity }]
+            }
+        ) {
+            cart {
+                id
+                ...CartPageFragment
+                ...AvailableShippingMethodsCartFragment
+            }
+        }
+    }
+    ${CartPageFragment}
+    ${AvailableShippingMethodsCartFragment}
+`;

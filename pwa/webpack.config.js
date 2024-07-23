@@ -50,6 +50,10 @@ module.exports = async env => {
             'redux-actions',
             'redux-thunk'
         ],
+        watchOptions: {
+            poll: true,
+            ignored: '**/node_modules',
+        },
         special: {
             'react-feather': {
                 esModules: true

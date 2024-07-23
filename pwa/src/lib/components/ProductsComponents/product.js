@@ -11,12 +11,23 @@ import Icon from '@magento/venia-ui/lib/components/Icon';
 import Button from '@magento/venia-ui/lib/components/Button';
 import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import ProductPopup from './productpopup';
+import Quantity from '@magento/venia-ui/lib/components/CartPage/ProductListing/quantity';
+// import ProductStepper from './productStepper';
 
 
 const Product = (props) => {
 
     const [product, setProduct] = useState({});
     const [showPopup, setShowPopup] = useState(false);
+
+    const {
+        onAddToWishlistSuccess,
+        setIsCartUpdating,
+        fetchCartDetails,
+        setActiveEditItem,
+        wishlistConfig,
+        cartItems
+    } = props;
 
     const {
         handleLinkClick,
@@ -26,8 +37,8 @@ const Product = (props) => {
         isSupportedProductType
     } = useGalleryItem(props);
 
-    const { storeConfig } = props;
-    const productUrlSuffix = storeConfig.product_url_suffix;
+    const { storeConfig, selectedProduct } = props;
+    const productUrlSuffix = ".html";  //  const productUrlSuffix = storeConfig.product_url_suffix
     // console.log(storeConfig);
     const { name, price_range, image: { url: small_image }, url_key, rating_summary } = item;
     const { url: smallImageURL } = small_image;
@@ -35,15 +46,11 @@ const Product = (props) => {
     const addButton =  (
         <AddToCartButton item={item} urlSuffix={productUrlSuffix} />
     ) ;
-    // const priceSource =
-    //     price_range.maximum_price.final_price ||
-    //     price_range.maximum_price.regular_price;
     
     const talonProps = useAddToCartButton({
         item,
         productUrlSuffix
     });
-    // console.log(talonProps);
 
     const { handleAddToCart, isDisabled, isInStock } = talonProps;
     const AddToCartIcon = (
@@ -77,14 +84,40 @@ const Product = (props) => {
             // enableScroll() 
           // }, 1000)
       };
+
+    function getProductQuantity() {
+        itemExist = cartItems.find(cartItem => cartItem.product.uid === item.uid);
+        if(itemExist != undefined) {
+            return itemExist.quantity;
+        } else {
+            return 0;
+        }
+    }
     
 
     return (
 
         <>
 
+{/* <ProductStepper productItem={selectedProduct}></ProductStepper> */}
             <div>
-            {showPopup && <ProductPopup product={product} onClose={handlePopoupClose} />}
+                {showPopup && <ProductPopup
+                        product={product} 
+                        onClose={handlePopoupClose}
+                        key={product.uid}
+                        item={product}
+                        storeConfig={storeConfig}
+                        selectedProduct={product}
+                        setActiveEditItem={setActiveEditItem}
+                        setIsCartUpdating={setIsCartUpdating}
+                        onAddToWishlistSuccess={onAddToWishlistSuccess}
+                        fetchCartDetails={fetchCartDetails}
+                        wishlistConfig={wishlistConfig}
+                        cartItems={cartItems}
+                        handleAddToCart={handleAddToCart}
+                        getProductQuantity={getProductQuantity}
+                        isDisabled={isDisabled}
+                />}
             </div>
         <div key={item.uid} className={styles.card} ref={itemRef}>
             {/* {index % 2 === 1 && <span className={styles.productDiscount}>-40%</span>} */}
@@ -98,10 +131,11 @@ const Product = (props) => {
                     <Image resource={item.image.url} alt={name} className={styles.image} />
                     </Link>
                     <div className={styles.icons}>
-                        <Button data-tooltip="Add to Cart" priority="high" type="button" onPress={handleAddToCart} className={styles.iconsBackground}><ShoppingCart size={20}/></Button>
+                        <span data-tooltip={isDisabled ? "Not Supported" : "Add to Cart"} style={{backgroundColor: isDisabled ? 'grey' : '', borderRadius: '50%'}}  onClick={handleAddToCart} className={styles.iconsBackground}><ShoppingCart size={20}/></span>
                         <span id={item.uid} 
                             onClick={() => {
                             setProduct(item);
+                            // setProduct(cartItems.find(cartItem => cartItem.product.uid === item.uid));
                             // disableScroll()
                             setShowPopup(true);
                             }}  size={20} data-tooltip="Quick View" className={styles.iconsBackground}><Eye  /></span>

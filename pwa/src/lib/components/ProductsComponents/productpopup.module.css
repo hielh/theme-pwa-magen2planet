@@ -190,6 +190,7 @@
   .reduceQuantity, .increaseQuantity {
     font-size: 20px;
     box-sizing: border-box;
+    cursor: pointer;
   }
 
   .status {

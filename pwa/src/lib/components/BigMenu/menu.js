@@ -108,6 +108,7 @@ const MenuComponent = () => {
           </div>
         </div>
       </div>
+      <hr />
     </>
   );
 }
