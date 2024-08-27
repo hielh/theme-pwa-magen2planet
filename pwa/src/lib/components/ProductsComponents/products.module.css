@@ -119,7 +119,7 @@
 
 .icons {
     position: absolute;
-    bottom: -30px; /* Adjust this value to the height of the icons container  Eye, Heart, BarChart, ShoppingCart*/
+    bottom: -40px; /* Adjust this value to the height of the icons container  Eye, Heart, BarChart, ShoppingCart*/
     left: 0;
     right: 0;
     display: flex;
@@ -141,7 +141,7 @@
 
 .card:hover .icons {
     opacity: 1;
-    bottom: 0px; /* Adjust this value to the desired distance from the image */
+    bottom: -20px; /* Adjust this value to the desired distance from the image */
 }
 
 .iconsBackground {

@@ -87,7 +87,8 @@ const Header = props => {
                         className={classes.logoContainer}
                         data-cy="Header-logoContainer"
                     >
-                        <img title="Martfury - Best Magento Theme 2023" alt="Martfury - Best Magento Theme 2023" width="225" height="50" src="https://martfury03.magebig.com/media/webps/png/media/logo/default/logo-martfury.webp" data-webp="1"></img>
+                        <div className={classes.logoName}>Mage2<span className={classes.logoSeparator}>Planet</span></div>
+                        {/* <img title="Martfury - Best Magento Theme 2023" alt="Martfury - Best Magento Theme 2023" width="225" height="50" src="https://martfury03.magebig.com/media/webps/png/media/logo/default/logo-martfury.webp" data-webp="1"></img> */}
                     </Link>
                     {searchBarHead}
                     <div className={classes.secondaryActions}>

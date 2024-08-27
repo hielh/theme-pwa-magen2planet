@@ -5,8 +5,23 @@ import { useMegaMenu } from '@magento/peregrine/lib/talons/MegaMenu/useMegaMenu'
 import { Link } from 'react-router-dom';
 import { useIsInViewport } from '@magento/peregrine/lib/hooks/useIsInViewport';
 import NavTrigger from '../Header/navTrigger';
+import { RefreshCw, Airplay, Radio, Wind, Aperture, Headphones, Smile, Activity, PhoneCall, Heart, Book, ChevronRight} from 'react-feather';
 
 const MenuComponent = () => {
+
+  const categories = [
+    { title: 'Consumer Electric', icon: <RefreshCw size={20} /> },
+    { title: 'Organic', icon: <Airplay size={20} /> },
+    { title: 'Home, Garden & Kitchen', icon: <Radio size={20} /> },
+    { title: 'Clothing & Apparel', icon: <Wind size={20} /> },
+    { title: 'Jewelry & Watches', icon: <Aperture size={20} /> },
+    { title: 'Computers & Technologies', icon: <Headphones size={20} /> },
+    { title: 'Babies & Moms', icon: <Smile size={20} /> },
+    { title: 'Sport & Outdoor', icon: <Activity size={20} /> },
+    { title: 'Phones & Accessories', icon: <PhoneCall size={20} /> },
+    { title: 'Health & Beauty', icon: <Heart size={20} /> },
+    { title: 'Books & Office', icon: <Book size={20} /> }
+  ];
 
   const mainNavRef = useRef(null);
   const {
@@ -64,8 +79,30 @@ const MenuComponent = () => {
             <ul className={styles.departementList}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}>
-                {['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5', 'Option 6', 'Option 7', 'Option 8', 'Option 9'].map((option, optIndex) => (
-                    <li key={optIndex} className={styles.departementListItem} ><a href="#">{option}</a></li>
+                {categories.map((option, optIndex) => (
+                    <li key={optIndex} className={styles.departementListItem} > 
+                      <div className={styles.sideMenuItem}>
+                        {option.icon} 
+                        <a style={{marginLeft: '10px'}} href="#">{option.title}</a>
+                      </div>
+                      {optIndex % 2 === 0 && (
+                        <div>
+                          <ChevronRight size={20} />
+                        </div>
+                      )}
+                      <div className={styles.departementListItemMenu}>
+                        <ul className={styles.categories}>
+                          <li className={styles.categoryItem}>Bright stars fill sky</li>
+                          <li className={styles.categoryItem}>Quiet moments bring clarity</li>
+                          <li className={styles.categoryItem}>Dreams turn into reality</li>
+                          <li className={styles.categoryItem}>Soft whispers of evening</li>
+                          <li className={styles.categoryItem}>Fresh breeze through window</li>
+                          <li className={styles.categoryItem}>Laughter echoes through halls</li>
+                          <li className={styles.categoryItem}>Simple joys bring happiness</li>
+                          <li className={styles.categoryItem}>New adventures await you</li>
+                      </ul>
+                      </div>
+                    </li>
                 ))}
             </ul>
           </div>

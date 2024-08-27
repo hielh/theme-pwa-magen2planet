@@ -3,7 +3,6 @@
     cursor: pointer;
     flex-basis: 300px;
     height: 48px;
-    display: none;
 }
 
 .departement:hover::before {
@@ -23,17 +22,67 @@
     position: absolute;
     top: 100%;
     left: 0;
-    z-index: 10;
+    z-index: 15;
     background-color: white;
     width: 100%;
 }
 
 .departementListItem {
-    composes: hover_text-green2 from global;
+    composes: hover_bg-green2 from global;
     padding: 0 10px;
     cursor: pointer;
-    height: 48px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* position: relative; */
 }
+
+.departementListItemMenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: white;
+    width: 400px;
+    min-height: 438px;
+    z-index: 10;
+    animation: slideUpItem 0.25s ease-in-out;
+    transition: top 1s;
+    padding: 10px 50px;
+    border-left: 1px solid #e3e3e3;
+}
+
+.departementListItem:hover .departementListItemMenu {
+    display: block;
+}
+
+.sideMenuItem {
+    display: flex;
+    align-items: center;
+}
+
+@keyframes slideUpItem {
+    from {
+        top: calc(30px);
+    }
+    to {
+        top: calc( 0px );
+    }
+  }
+
+/* start categories styles */
+
+.categories {
+
+}
+.categoryItem {
+    padding: 10px 0;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+/* end categories styles */
+
 
 .departement:hover .departementList {
     display: block;
@@ -68,7 +117,7 @@
         display: none;
     }
     .departement {
-        display: none;
+        display: none !important;
     }
 }
 
@@ -91,7 +140,7 @@
     background: rgba(0,0,0,.5);
     top: 100% ;
     right: 0;
-    z-index: 10;
+    z-index: 14;
     bottom: 0;
     pointer-events: none;
     width: 100vw;
@@ -115,7 +164,7 @@
     display: none;
     position: absolute;
     background: white;
-    z-index: 11;
+    z-index: 14;
     top: calc(100% + 0px);
     transition: top 1s;
     left: 0;

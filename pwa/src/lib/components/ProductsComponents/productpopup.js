@@ -15,6 +15,7 @@ const ProductPopup = (props) => {
     const [productQuantity, setProductQuantity] = useState(0);
     const [disabledMinusQuantity, setDisabledMinusQuantity] = useState(false);
     const [isUpdatingCart, setIsUpdatingCart] = useState(false);
+    const [isZoomingOut, setIsZoomingOut] = useState(false);
 
     const { 
          product,
@@ -115,15 +116,21 @@ const ProductPopup = (props) => {
 
     const closeProductPopup = (e) => {
         if(e.target.id === 'overlayClickClose'){
-            onClose();
+            setIsZoomingOut(true);
+            setTimeout(() => onClose(), 500);
         }
     }
 
+
+    const closeProductPopupButton = (e) => {
+            setIsZoomingOut(true);
+            setTimeout(() => onClose(), 500);
+    }
   return (
     <>
     <div className={styles.overlay} id='overlayClickClose' onClick={closeProductPopup} >
-        <div className={styles.mianPopup}>
-        <p className={styles.closeButton} onClick={onClose} style={{cursor: 'pointer'}} ><X size={30} strokeWidth={1}/></p> 
+        <div className={isZoomingOut ? styles.outPopup : styles.mainPopup}>
+        <p className={styles.closeButton} onClick={closeProductPopupButton} style={{cursor: 'pointer'}} ><X size={30} strokeWidth={1}/></p> 
             {/* start header */}
             <div className={styles.header}>
                 <div>

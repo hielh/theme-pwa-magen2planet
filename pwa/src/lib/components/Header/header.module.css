@@ -113,6 +113,20 @@
     composes: self-center from global;
 }
 
+.logoName {
+    font-weight: bold;
+    font-size: 45px;
+    text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black;
+    max-width: 100%;
+}
+
+.logoSeparator {
+    color: #5fa30f;
+    text-shadow: 1px 0 0 #5fa30f, -1px 0 0 #5fa30f, 0 1px 0 #5fa30f, 0 -1px 0 #5fa30f;
+    font-weight: 900;
+    font-size: 45px;
+}
+
 .logoContainer {
     composes: col-start-2 from global;
     composes: justify-self-center from global;

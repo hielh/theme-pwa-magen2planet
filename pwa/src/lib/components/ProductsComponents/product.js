@@ -150,7 +150,7 @@ const Product = (props) => {
                 >
                     <h2 className={styles.name}>{name}</h2>
                 </Link>
-                    {addButton}
+                    {/* {addButton} */}
                 <div className={styles.footer}>
                     <ul style={{display: 'flex'}}>
                         <li> <Star size={18} style={{color: 'yellow'}}/> </li>

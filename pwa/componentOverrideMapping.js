@@ -52,4 +52,13 @@ module.exports = componentOverrideMapping = {
 
     [`${veniaUiPackagePath}/lib/components/Main/main.js`]:'src/lib/components/Main/main.js',
     [`${veniaUiPackagePath}/lib/components/Main/main.module.css`]:'src/lib/components/Main/main.module.css',
+
+    [`${veniaUiPackagePath}/lib/components/CartPage/cartPage.js`]:'src/lib/components/CartPage/cartPage.js',
+    [`${veniaUiPackagePath}/lib/components/CartPage/cartPage.module.css`]:'src/lib/components/CartPage/cartPage.module.css',
+
+    [`${veniaUiPackagePath}/lib/components/CartPage/PriceSummary/priceSummary.js`]:'src/lib/components/CartPage/PriceSummary/priceSummary.js',
+    [`${veniaUiPackagePath}/lib/components/CartPage/PriceSummary/priceSummary.module.css`]:'src/lib/components/CartPage/PriceSummary/priceSummary.module.css',
+    [`${veniaUiPackagePath}/lib/components/CartPage/PriceSummary/discountSummary.module.css`]:'src/lib/components/CartPage/PriceSummary/discountSummary.module.css',
+
+    [`${veniaUiPackagePath}/lib/components/MiniCart/miniCart.module.css`]:'src/lib/components/MiniCart/miniCart.module.css',
 };
