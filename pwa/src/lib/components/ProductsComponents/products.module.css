@@ -35,10 +35,13 @@
 }
 
 .container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    justify-items: center;
+    /* display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
+    justify-content: center; */
+    gap: 30px;
     padding: 20px;
     background-color: #f9f9f9;
 }

@@ -1,15 +1,17 @@
 .features {
-    composes: grid from global;
-    composes: justify-between from global;
-    composes: items-center from global;
-    composes: py-14 from global;
-    composes: md_divide-x from global;
-    composes: divide-light-blue-400 from global;
-    composes: grid-cols-2 from global;
-    composes: md_grid-cols-4 from global;
-    composes: md_gap-x-10 from global;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 60px 0;
     margin-bottom: -20px;
 }
+
+@media (max-width: 1400px) {
+    .features {
+        margin-top: -50px;
+    }
+}
+
 .featuresItem {
     composes: flex from global;
     composes: flex-col from global;

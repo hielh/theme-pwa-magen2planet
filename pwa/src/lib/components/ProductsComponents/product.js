@@ -26,7 +26,8 @@ const Product = (props) => {
         fetchCartDetails,
         setActiveEditItem,
         wishlistConfig,
-        cartItems
+        cartItems,
+        index
     } = props;
 
     const {
@@ -100,27 +101,29 @@ const Product = (props) => {
         <>
 
 {/* <ProductStepper productItem={selectedProduct}></ProductStepper> */}
-            <div>
-                {showPopup && <ProductPopup
-                        product={product} 
-                        onClose={handlePopoupClose}
-                        key={product.uid}
-                        item={product}
-                        storeConfig={storeConfig}
-                        selectedProduct={product}
-                        setActiveEditItem={setActiveEditItem}
-                        setIsCartUpdating={setIsCartUpdating}
-                        onAddToWishlistSuccess={onAddToWishlistSuccess}
-                        fetchCartDetails={fetchCartDetails}
-                        wishlistConfig={wishlistConfig}
-                        cartItems={cartItems}
-                        handleAddToCart={handleAddToCart}
-                        getProductQuantity={getProductQuantity}
-                        isDisabled={isDisabled}
-                />}
-            </div>
+            {
+                
+                    showPopup && (<div> <ProductPopup
+                            product={product} 
+                            onClose={handlePopoupClose}
+                            key={product.uid}
+                            item={product}
+                            storeConfig={storeConfig}
+                            selectedProduct={product}
+                            setActiveEditItem={setActiveEditItem}
+                            setIsCartUpdating={setIsCartUpdating}
+                            onAddToWishlistSuccess={onAddToWishlistSuccess}
+                            fetchCartDetails={fetchCartDetails}
+                            wishlistConfig={wishlistConfig}
+                            cartItems={cartItems}
+                            handleAddToCart={handleAddToCart}
+                            getProductQuantity={getProductQuantity}
+                            isDisabled={isDisabled}
+                    /> </div> )
+                
+            }
         <div key={item.uid} className={styles.card} ref={itemRef}>
-            {/* {index % 2 === 1 && <span className={styles.productDiscount}>-40%</span>} */}
+            {index % 2 === 1 && <span className={styles.productDiscount}>-40%</span>}
                 <div className={styles.imageHolder}>
                     {/* <Image resource={smallImageURL} alt={name} className={styles.image} /> */}
                     <Link

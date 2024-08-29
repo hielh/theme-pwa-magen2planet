@@ -35,14 +35,27 @@
       overflow-y: scroll;
       /* max-height: fit-content; */
     }
-    .mianPopup {
-      /* height: unset; */
-      /* margin-top: 20px; */
-      top: 360px;
-    }
     .overlay::-webkit-scrollbar {
       display: none;
   }
+  }
+
+  @media (max-width: 800px) {
+    .mainPopup {
+      top: 13rem;
+    }
+  }
+
+  @media (max-width: 614px) {
+    .mainPopup {
+      top: 18rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .mainPopup {
+      top: 22rem;
+    }
   }
 
   
@@ -61,7 +74,7 @@
       transform: scale(1, 1);
     }
     100% {
-      transform: scale(0.5, 0.5);
+      transform: scale(0.1, 0.1);
     }
   }
   
@@ -105,7 +118,7 @@
     display: flex;
     flex-direction: column;
     padding: 30px;
-    animation: zoom-out 0.5s ease-in-out;
+    animation: zoom-out 0.5s linear;
   }
 
   .sidebarHeaders {
@@ -161,7 +174,7 @@
   }
   
   .image {
-    max-height: 400px;
+    max-height: 500px;
     flex: 1 1 250px;
     overflow: hidden;
     /* width: 35%; */

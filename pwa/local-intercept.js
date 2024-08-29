@@ -32,11 +32,11 @@ function localIntercept(targets) {
             new moduleOverridePlugin(componentOverrideMapping).apply(compiler);
         })
 
-        const MainComponent = targetables.reactComponent(
-            "@magento/../../src/lib/ContentTypes/Slider/slider.js"
-        );
+        // const MainComponent = targetables.reactComponent(
+        //     "@magento/../../src/lib/ContentTypes/Slider/slider.js"
+        // );
 
-        MainComponent.insertAfterJSX("<Features />", "<span>Hello World!</span>");
+        // MainComponent.insertAfterJSX("<Features />", "<span>Hello World!</span>");
     }
 
 module.exports = localIntercept;

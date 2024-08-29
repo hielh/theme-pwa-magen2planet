@@ -17,6 +17,7 @@ import News from './news';
 import { useGallery } from '@magento/peregrine/lib/talons/Gallery/useGallery';
 import { useProductListing } from '@magento/peregrine/lib/talons/CartPage/ProductListing/useProductListing';
 import Product  from './product';
+import ProductDescription from '../productDescription/productDescription';
 
 
 const Products = (props) => {
@@ -120,6 +121,7 @@ const Products = (props) => {
       {showPopup && <ProductPopup product={product} onClose={handlePopoupClose} />}
     </div> */}
       <Categories/>
+      {/* <ProductDescription></ProductDescription> */}
       <Promos/>
       {/* <ImageZoom src={'http://magento.loc/media/catalog/product/cache/f40c6f668743ff332496cd79549bd170/v/t/vt11-ll_main.jpg'} zoomScale={3} /> */}
 
@@ -149,6 +151,7 @@ const Products = (props) => {
                         fetchCartDetails={fetchCartDetails}
                         wishlistConfig={wishlistConfig}
                         cartItems={items}
+                        index={index}
                 >
 
                 </Product>

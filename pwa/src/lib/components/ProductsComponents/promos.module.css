@@ -1,15 +1,12 @@
 .promoSection {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 70px;
     margin: 40px 0;
 }
 
 .promoItem {
     position: relative;
-    width: 48%;
-    flex-basis: 600px;
     border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;

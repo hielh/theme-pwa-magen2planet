@@ -14,8 +14,8 @@ module.exports = componentOverrideMapping = {
     [`${veniaUiPackagePath}/lib/components/Button/button.js`]:'src/lib/components/Button/button.js',
     [`${veniaUiPackagePath}/lib/components/Button/button.module.css`]:'src/lib/components/Button/button.module.css',
 
-    [`${pagebuilderPackagePath}/lib/ContentTypes/Slider/slider.js`]:'src/lib/ContentTypes/Slider/slider.js',
-    [`${pagebuilderPackagePath}/lib/ContentTypes/Slider/slider.module.css`]:'src/lib/ContentTypes/Slider/slider.module.css',
+    // [`${pagebuilderPackagePath}/lib/ContentTypes/Slider/slider.js`]:'src/lib/ContentTypes/Slider/slider.js',
+    // [`${pagebuilderPackagePath}/lib/ContentTypes/Slider/slider.module.css`]:'src/lib/ContentTypes/Slider/slider.module.css',
 
     [`${veniaUiPackagePath}/lib/components/Header/header.js`]:'src/lib/components/Header/header.js',
     [`${veniaUiPackagePath}/lib/components/Header/header.module.css`]:'src/lib/components/Header/header.module.css',
@@ -61,4 +61,7 @@ module.exports = componentOverrideMapping = {
     [`${veniaUiPackagePath}/lib/components/CartPage/PriceSummary/discountSummary.module.css`]:'src/lib/components/CartPage/PriceSummary/discountSummary.module.css',
 
     [`${veniaUiPackagePath}/lib/components/MiniCart/miniCart.module.css`]:'src/lib/components/MiniCart/miniCart.module.css',
+
+    [`${veniaUiPackagePath}/lib/components/ProductFullDetail/productFullDetail.js`]:'src/lib/components/ProductFullDetail/productFullDetail.js',
+    [`${veniaUiPackagePath}/lib/components/ProductFullDetail/productFullDetail.module.css`]:'src/lib/components/ProductFullDetail/productFullDetail.module.css',
 };
