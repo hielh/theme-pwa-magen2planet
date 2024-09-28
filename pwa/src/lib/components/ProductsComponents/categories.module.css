@@ -3,6 +3,9 @@
   }
   
   .categoryTitle {
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
     font-size: 1.5em;
     margin-bottom: 20px;
   }
@@ -11,6 +14,10 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 15px;
+    max-width: 1200px;
+    padding: 0 15px;
+    margin: 0 auto;
   }
   
   .categoryCategory {
@@ -23,8 +30,8 @@
   }
 
   .categoryCategory:hover {
-    color: #5fa30f;
-    border-color: #5fa30f;
+    color: var(--global-green);
+    border-color: var(--global-green);
     cursor: pointer;
   }
   

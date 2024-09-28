@@ -9,10 +9,7 @@ import Image from '@magento/venia-ui/lib/components/Image';
 import { useAddToCartButton } from '@magento/peregrine/lib/talons/Gallery/useAddToCartButton';
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import Button from '@magento/venia-ui/lib/components/Button';
-import resourceUrl from '@magento/peregrine/lib/util/makeUrl';
 import ProductPopup from './productpopup';
-import Quantity from '@magento/venia-ui/lib/components/CartPage/ProductListing/quantity';
-// import ProductStepper from './productStepper';
 
 
 const Product = (props) => {
@@ -52,8 +49,22 @@ const Product = (props) => {
         item,
         productUrlSuffix
     });
+    const UNSUPPORTED_PRODUCT_TYPES = [
+        'VirtualProduct',
+        'BundleProduct',
+        'GroupedProduct',
+        'DownloadableProduct'
+    ];
 
-    const { handleAddToCart, isDisabled, isInStock } = talonProps;
+    const isInStock = item.stock_status === 'IN_STOCK';
+
+    const productType = item.__typename;
+    const isUnsupportedProductType = UNSUPPORTED_PRODUCT_TYPES.includes(
+        productType
+    );
+    const isDisabled = !isInStock || isUnsupportedProductType;
+
+    const { handleAddToCart } = talonProps;
     const AddToCartIcon = (
         <Icon
             classes={{ icon: styles.productDiscount }}
@@ -97,44 +108,37 @@ const Product = (props) => {
     
 
     return (
-
         <>
-
-{/* <ProductStepper productItem={selectedProduct}></ProductStepper> */}
             {
-                
-                    showPopup && (<div> <ProductPopup
-                            product={product} 
-                            onClose={handlePopoupClose}
-                            key={product.uid}
-                            item={product}
-                            storeConfig={storeConfig}
-                            selectedProduct={product}
-                            setActiveEditItem={setActiveEditItem}
-                            setIsCartUpdating={setIsCartUpdating}
-                            onAddToWishlistSuccess={onAddToWishlistSuccess}
-                            fetchCartDetails={fetchCartDetails}
-                            wishlistConfig={wishlistConfig}
-                            cartItems={cartItems}
-                            handleAddToCart={handleAddToCart}
-                            getProductQuantity={getProductQuantity}
-                            isDisabled={isDisabled}
-                    /> </div> )
-                
+                showPopup && (<div> <ProductPopup
+                    product={product} 
+                    onClose={handlePopoupClose}
+                    key={product.uid}
+                    item={product}
+                    storeConfig={storeConfig}
+                    selectedProduct={product}
+                    setActiveEditItem={setActiveEditItem}
+                    setIsCartUpdating={setIsCartUpdating}
+                    onAddToWishlistSuccess={onAddToWishlistSuccess}
+                    fetchCartDetails={fetchCartDetails}
+                    wishlistConfig={wishlistConfig}
+                    cartItems={cartItems}
+                    handleAddToCart={handleAddToCart}
+                    getProductQuantity={getProductQuantity}
+                    isDisabled={isDisabled}
+                /> </div> ) 
             }
-        <div key={item.uid} className={styles.card} ref={itemRef}>
-            {index % 2 === 1 && <span className={styles.productDiscount}>-40%</span>}
+            <div key={item.uid} className={styles.card} ref={itemRef}>
+                {index % 2 === 1 && <span className={styles.productDiscount}>-40%</span>}
                 <div className={styles.imageHolder}>
-                    {/* <Image resource={smallImageURL} alt={name} className={styles.image} /> */}
                     <Link
                         onClick={handleLinkClick}
                         to={productLink}
                     >
-                    {/* <img src={item.image.url} alt={name} className={styles.image}/> */}
                     <Image resource={item.image.url} alt={name} className={styles.image} />
                     </Link>
                     <div className={styles.icons}>
-                        <span data-tooltip={isDisabled ? "Not Supported" : "Add to Cart"} style={{backgroundColor: isDisabled ? 'grey' : '', borderRadius: '50%'}}  onClick={handleAddToCart} className={styles.iconsBackground}><ShoppingCart size={20}/></span>
+                        <span data-tooltip={isDisabled ? "Not Supported" : "Add to Cart"} style={{backgroundColor: isDisabled ? 'grey' : '', borderRadius: '50%'}}  onClick={handleAddToCart} className={`${styles.iconsBackground} ${isDisabled ? '' : styles.addToCartButton}`}><ShoppingCart size={20}/></span>
                         <span id={item.uid} 
                             onClick={() => {
                             setProduct(item);
@@ -146,28 +150,27 @@ const Product = (props) => {
                         <span data-tooltip="Add to Compare" className={styles.iconsBackground}><BarChart size={20} /></span>
                     </div>
                 </div>
-            <div className={styles.details}>
-                <Link
-                onClick={handleLinkClick}
-                to={productLink}
-                >
-                    <h2 className={styles.name}>{name}</h2>
-                </Link>
-                    {/* {addButton} */}
-                <div className={styles.footer}>
-                    <ul style={{display: 'flex'}}>
-                        <li> <Star size={18} style={{color: 'yellow'}}/> </li>
-                        <li> <Star size={18} style={{color: 'yellow'}}/> </li>
-                        <li> <Star size={18} style={{color: 'yellow'}}/> </li>
-                        <li> <Star size={18} style={{color: 'yellow'}}/> </li>
-                        <li> <Star size={18} style={{color: 'grey'}}/> </li>
-                    </ul>
-                    <span
-                        className={styles.price}>${item.price_range.minimum_price.regular_price.value.toFixed(2)}
-                    </span>
+                <div className={styles.details}>
+                    <Link
+                    onClick={handleLinkClick}
+                    to={productLink}
+                    >
+                        <h2 className={styles.name}>{name}</h2>
+                    </Link>
+                    <div className={styles.footer}>
+                        <ul style={{display: 'flex'}}>
+                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
+                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
+                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
+                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
+                            <li> <Star size={15} fill='#dddddd' style={{color: '#dddddd'}}/> </li>
+                        </ul>
+                        <span
+                            className={styles.price}>${item.price_range.minimum_price.regular_price.value.toFixed(2)}
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     );
 }

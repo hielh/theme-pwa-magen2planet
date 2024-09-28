@@ -1,5 +1,6 @@
 .root {
-    composes: border-2 from global;
+    /* composes: border-2 from global; */
+    border-width: 1px;
     composes: border-solid from global;
     composes: cursor-pointer from global;
     composes: font-bold from global;
@@ -11,8 +12,11 @@
     composes: min-w-[10rem] from global;
     composes: outline-none from global;
     composes: pointer-events-auto from global;
-    composes: px-sm from global;
-    composes: rounded-full from global;
+    /* composes: px-sm from global; */
+    padding: 0 55px;
+    font-size: 15px;
+    text-transform: capitalize;
+    /* composes: rounded-full from global; */
     composes: text-center from global;
     composes: text-sm from global;
     composes: uppercase from global;
@@ -81,6 +85,7 @@
     composes: bg-green2 from global;
     composes: border-green2 from global;
     composes: text-white from global;
+    border-radius: 2px;
 
     /* composes: active_bg-brand-darkest from global;
     composes: active_border-brand-darkest from global;
@@ -92,8 +97,8 @@
 }
 
 .root_highPriority:hover {
-    background-color: rgb(0, 191, 0);
-    border-color: rgb(0, 191, 0);
+    background-color: white;
+    color: black;
 }
 
 .root_lowPriorityNegative,
@@ -134,4 +139,5 @@
     composes: items-center from global;
     composes: justify-center from global;
     composes: justify-items-center from global;
+    padding: 10px 0;
 }

@@ -41,6 +41,7 @@
     /* composes: pb-xs from global; */
     composes: relative from global;
     composes: w-full from global;
+    min-width: 250px;
 }
 
 .search {

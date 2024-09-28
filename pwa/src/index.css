@@ -3,3 +3,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --global-green: #5fa30f;
+    --global-green-hover: #427b01;
+}

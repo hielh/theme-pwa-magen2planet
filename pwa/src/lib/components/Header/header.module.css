@@ -45,7 +45,8 @@
     composes: sm_justify-between from global;
     composes: sm_items-center from global;
     composes: sm_h-8 from global;
-    composes: max-w-[1440px] from global;
+    composes: max-w-[1200px] from global;
+    padding: 0 15px;
     composes: sm_mx-auto from global;
 }
 
@@ -79,18 +80,30 @@
 .toolbar2 {
     composes: border-0 from global;
     composes: flex from global;
+    flex-wrap: wrap;
     composes: items-center from global;
-    composes: sm_flex-row from global;
+    /* composes: sm_flex-row from global;
     composes: flex-col from global;
-    composes: content-center from global;
-    composes: h-30 from global;
+    composes: content-center from global; */
+    min-height: 6rem;
     composes: items-center from global;
-    composes: justify-between from global;
-    composes: max-w-[1440px] from global;
+    composes: max-w-[1200px] from global;
+    padding: 0 15px;
     composes: mx-auto from global;
     composes: relative from global;
 
-    composes: lg_h-24 from global;
+}
+
+@media (max-width: 1100px) {
+    .toolbar2 {
+        justify-content: center;
+    }
+}
+
+@media (min-width: 1100px) {
+    .toolbar2 {
+        justify-content: space-between;
+    }
 }
 
 .toolbarLang {
@@ -114,17 +127,17 @@
 }
 
 .logoName {
-    font-weight: bold;
-    font-size: 45px;
+    font-weight: 700;
+    font-size: 40px;
     text-shadow: 1px 0 0 black, -1px 0 0 black, 0 1px 0 black, 0 -1px 0 black;
     max-width: 100%;
 }
 
 .logoSeparator {
-    color: #5fa30f;
-    text-shadow: 1px 0 0 #5fa30f, -1px 0 0 #5fa30f, 0 1px 0 #5fa30f, 0 -1px 0 #5fa30f;
-    font-weight: 900;
-    font-size: 45px;
+    color: #fcb800;
+    text-shadow: 1px 0 0 #fcb800, -1px 0 0 #fcb800, 0 1px 0 #fcb800, 0 -1px 0 #fcb800;
+    font-weight: 700;
+    font-size: 40px;
 }
 
 .logoContainer {

@@ -17,7 +17,6 @@ import News from './news';
 import { useGallery } from '@magento/peregrine/lib/talons/Gallery/useGallery';
 import { useProductListing } from '@magento/peregrine/lib/talons/CartPage/ProductListing/useProductListing';
 import Product  from './product';
-import ProductDescription from '../productDescription/productDescription';
 
 
 const Products = (props) => {
@@ -63,43 +62,50 @@ const Products = (props) => {
 
 
     const LOAD_PRODUCTS = gql`
-      query GetProductData($pageSize: Int!, $currentPage: Int!) {
-      products(filter: { name: { match: "" } }, pageSize: $pageSize, currentPage: $currentPage) {
-        items {
-          id,
-          uid,
-          name,
-          sku,
-          stock_status,
-          url_key,
-          image {
-            url
-          }
-          price_range {
-            minimum_price {
-              regular_price {
-                value
-                currency
-              }
-              final_price {
-                value
-                currency
+      query categoryList($ids: [String!]) {
+      categoryList(filters: {ids: { in: $ids }}){
+        uid
+        children_count
+        name
+        products {
+          items {
+            id,
+            uid,
+            name,
+            sku,
+            stock_status,
+            url_key,
+            image {
+              url
+            }
+            price_range {
+              minimum_price {
+                regular_price {
+                  value
+                  currency
+                }
+                final_price {
+                  value
+                  currency
+                }
               }
             }
+            review_count
+            rating_summary
           }
-          review_count
-          rating_summary
         }
       }
     }
     `;
 
     const { error, loading, data } = useQuery(LOAD_PRODUCTS, {
-        variables: { pageSize: 20, currentPage: 1 }
+      variables: { ids: [5]},
+        fetchPolicy: 'cache-and-network',
+        nextFetchPolicy: 'cache-first'
     });
     useEffect(() => {
         if (data) {
-            console.log(data);
+            console.log(data, 'new Categories');
         }
     }, [data]);
 
@@ -121,7 +127,6 @@ const Products = (props) => {
       {showPopup && <ProductPopup product={product} onClose={handlePopoupClose} />}
     </div> */}
       <Categories/>
-      {/* <ProductDescription></ProductDescription> */}
       <Promos/>
       {/* <ImageZoom src={'http://magento.loc/media/catalog/product/cache/f40c6f668743ff332496cd79549bd170/v/t/vt11-ll_main.jpg'} zoomScale={3} /> */}
 
@@ -139,7 +144,7 @@ const Products = (props) => {
             </nav>
           </div>
         <div className={styles.container}>
-            {data?.products?.items.map((product, index) => (
+            {data?.categoryList[0]?.products?.items.map((product, index) => (
                 <Product
                         key={product.uid}
                         item={product}

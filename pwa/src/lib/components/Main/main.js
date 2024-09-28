@@ -8,6 +8,7 @@ import Header from '../Header';
 import MenuComponent from '../BigMenu/menu';
 import defaultClasses from './main.module.css';
 import HomeSlider from '../ProductsComponents/homeslider';
+import SliderBlock from '../HomeSliderBlock/sliderBlock';
 
 const Main = props => {
     const { children, isMasked } = props;
@@ -22,7 +23,8 @@ const Main = props => {
         <main className={rootClass}>
             <Header />
             <MenuComponent />
-            <HomeSlider/>
+            {/* <HomeSlider/> */}
+            {window.location.pathname === "/" && <SliderBlock></SliderBlock> }
             <div className={pageClass}>{children}</div>
             <Footer />
         </main>

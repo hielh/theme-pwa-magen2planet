@@ -48,7 +48,7 @@ const CMSPage = props => {
             <Meta name="title" content={pageTitle} />
             <Meta name="description" content={meta_description} />
             <article className={rootClassName}>
-                {headingElement}
+                {/* {headingElement} */}
                 {/* <RichContent html={content} /> */}
                 <Products/>
             </article>

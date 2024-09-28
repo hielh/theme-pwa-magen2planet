@@ -12,7 +12,7 @@
     z-index: 20;
     width: 100%;
     height: 2px;
-    background-color: #5fa30f;
+    background-color: var(--global-green);
     cursor: pointer;
     box-sizing: border-box;
 }
@@ -29,6 +29,7 @@
 
 .departementListItem {
     composes: hover_bg-green2 from global;
+    composes: hover_text-white from global;
     padding: 0 10px;
     cursor: pointer;
     height: 40px;
@@ -74,11 +75,11 @@
 /* start categories styles */
 
 .categories {
-
 }
 .categoryItem {
     padding: 10px 0;
     border-bottom: 1px solid #e3e3e3;
+    color: black;
 }
 
 /* end categories styles */
@@ -93,10 +94,12 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    max-width: 1440px;
+    max-width: 1200px;
+    padding: 0 15px;
     margin-left: auto;
     margin-right: auto;
     position: relative;
+    font-size: 15px;
     font-weight: bold;
 }
 
@@ -192,5 +195,25 @@
 }
 
 .phone {
-    display: flex;
+    display: none;
+}
+
+@media (min-width: 1193px) {
+    .phone {
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 968px) {
+    .phone {
+        display: flex;
+        align-items: center;
+        font-size: 15px;
+    }
+
+    .menuItems {
+        display: none;
+    }
 }

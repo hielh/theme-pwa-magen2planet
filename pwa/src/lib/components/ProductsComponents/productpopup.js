@@ -8,7 +8,8 @@ import { useCartContext } from '@magento/peregrine/lib/context/cart';
 import { CartPageFragment } from '@magento/peregrine/lib/talons/CartPage/cartPageFragments.gql.js';
 import { AvailableShippingMethodsCartFragment } from '@magento/peregrine/lib/talons/CartPage/PriceAdjustments/ShippingMethods/shippingMethodsFragments.gql.js';
 import ProductObject from '../TextInput/fileJSobject';
-import { useEventingContext } from '@magento/peregrine/lib/context/eventing'
+import { useEventingContext } from '@magento/peregrine/lib/context/eventing';
+import { useAddToCartHook } from '../../customHooks/useAddToCartHook';
 
 const ProductPopup = (props) => {
 
@@ -20,39 +21,49 @@ const ProductPopup = (props) => {
     const { 
          product,
          onClose,
-         storeConfig,
-         selectedProduct,
-         setActiveEditItem,
-         setIsCartUpdating,
-         onAddToWishlistSuccess,
-         fetchCartDetails,
-         wishlistConfig,
-         handleAddToCart,
+        //  storeConfig,
+        //  selectedProduct,
+        //  setActiveEditItem,
+        //  setIsCartUpdating,
+        //  onAddToWishlistSuccess,
+        //  fetchCartDetails,
+        //  wishlistConfig,
          cartItems,
-         isDisabled
     } = props;
+
+    const item = product
+    const {
+        handleAddToCart,
+        isDisabled,
+        isInStock,
+    } = useAddToCartHook({ item, urlSuffix: '.html' });
 
     
     useEffect(() => {
+        console.log(product, 'product');
+        
         if(cartItems.length > 0) {
             let itemExist = cartItems.find(cartItem => cartItem.product.uid === product.uid);
-            if(itemExist != undefined) {
+            if(itemExist) {
                 setProductQuantity(itemExist.quantity);
             } else {
                 setProductQuantity(0);
             }
         }
-    }, [])
+    }, [isUpdatingCart])
 
     const [{ cartId }] = useCartContext();
     const [, { dispatch }] = useEventingContext();
 
-    const handleAddToCartFunctionnality = ()=> {
-        if(getCartItem() !=undefined){
-            handleUpdateItemQuantity()
+    const handleAddToCartFunctionnality = async ()=> {
+        if(getCartItem()){
+            await handleUpdateItemQuantity()
         }
         else{
-            handleAddToCart()
+            setIsUpdatingCart(true);
+            await handleAddToCart(productQuantity)
+            setIsUpdatingCart(false);
+            await closeAfterAddToCart()
         }
     }
 
@@ -82,6 +93,8 @@ const ProductPopup = (props) => {
                 const selectedOptions = null; // just pour le moment
             } catch (err) {
                 // Make sure any errors from the mutation are displayed.
+                console.log(err.message);
+                
             }
         },
         [cartId, dispatch, product, updateItemQuantity, productQuantity]
@@ -117,15 +130,22 @@ const ProductPopup = (props) => {
     const closeProductPopup = (e) => {
         if(e.target.id === 'overlayClickClose'){
             setIsZoomingOut(true);
-            setTimeout(() => onClose(), 500);
+            setTimeout(() => onClose(), 300);
         }
     }
 
 
-    const closeProductPopupButton = (e) => {
+    const closeProductPopupButton = () => {
             setIsZoomingOut(true);
-            setTimeout(() => onClose(), 500);
+            setTimeout(() => onClose(), 300);
     }
+
+    const closeAfterAddToCart = async () => {
+            setIsUpdatingCart(true);
+            setIsZoomingOut(true);
+            await setTimeout(() => onClose(), 500);
+    }
+
   return (
     <>
     <div className={styles.overlay} id='overlayClickClose' onClick={closeProductPopup} >
@@ -136,11 +156,11 @@ const ProductPopup = (props) => {
                 <div>
                     <p className={styles.headerTitle}>Ocean Spray 100% Juice -10 Ounce Bottle</p>
                     <ul style={{display: 'flex', }}>
-                        <li> <Star size={18} style={{color: '#fc0'}}/> </li>
-                        <li> <Star size={18} style={{color: '#fc0'}}/> </li>
-                        <li> <Star size={18} style={{color: '#fc0'}}/> </li>
-                        <li> <Star size={18} style={{color: '#fc0'}}/> </li>
-                        <li> <Star size={18} style={{color: 'grey'}}/> </li>
+                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
+                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
+                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
+                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
+                            <li> <Star size={15} fill='#dddddd' style={{color: '#dddddd'}}/> </li>
                     <span style={{marginLeft: '30px'}}>SKU: <span className={styles.sku}>{product.sku}</span></span>
                     </ul>
                 </div>
@@ -156,7 +176,7 @@ const ProductPopup = (props) => {
             <div className={styles.body}>
                 <div className={styles.image}>
                     <span className={styles.minus}>-40%</span>
-                    <img className={styles.imageImg} src={product?.image?.url} alt='Ocean Spray 100% Juice -10 Ounce Bottle' />
+                    <img className={styles.imageImg} src={product?.image?.url || product?.thumbnail?.url} alt='Ocean Spray 100% Juice -10 Ounce Bottle' />
                     {/* <ImageZoom src={product?.image?.url} zoomScale={3} /> */}
                 </div>
                 {/* start product-details */}
@@ -189,7 +209,8 @@ const ProductPopup = (props) => {
                         </div>
                         <button className={styles.addToCart}
                                 onClick={handleAddToCartFunctionnality}
-                                style={{backgroundColor: isDisabled ? 'grey' : '', cursor: isDisabled ? 'not-allowed' : 'pointer'}}
+                                disabled={isDisabled}
+                                style={{backgroundColor: isUpdatingCart ? 'grey' : '', cursor: isUpdatingCart ? 'not-allowed' : 'pointer'}}
                         > { isUpdatingCart ? 'Adding...' : 'Add To Cart' } </button>
                         <p>
                             <Heart size={30} strokeWidth={1}/>

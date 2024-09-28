@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { useIsInViewport } from '@magento/peregrine/lib/hooks/useIsInViewport';
 import NavTrigger from '../Header/navTrigger';
 import { RefreshCw, Airplay, Radio, Wind, Aperture, Headphones, Smile, Activity, PhoneCall, Heart, Book, ChevronRight} from 'react-feather';
+import SidebarCategories from '../SidebarCategories/sidebarCategories';
+
 
 const MenuComponent = () => {
 
@@ -76,7 +78,12 @@ const MenuComponent = () => {
             <Menu />
             <h5>Shop By Departement</h5>
             <ChevronDown size={16} />
-            <ul className={styles.departementList}
+
+            <SidebarCategories
+              styles={styles}>
+            </SidebarCategories>
+
+            {/* <ul className={styles.departementList}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}>
                 {categories.map((option, optIndex) => (
@@ -104,10 +111,10 @@ const MenuComponent = () => {
                       </div>
                     </li>
                 ))}
-            </ul>
+            </ul> */}
           </div>
-          <div>  <NavTrigger />
-            { shouldRenderItems &&  <ul className={styles.menuItems} ref={mainNavRef} >
+          <div className={styles.mainMenu}>  <NavTrigger />
+            { shouldRenderItems && megaMenuData.children && <ul className={styles.menuItems} ref={mainNavRef} >
               {megaMenuData.children.map((item, index) => (
                 <li
                   key={index}
@@ -140,7 +147,7 @@ const MenuComponent = () => {
             </ul>}
           </div>
           <div className={styles.phone}>
-            <Phone />
+            <Phone size={17} strokeWidth={1} style={{marginRight: '10px'}} />
             Hoteline: 1-800-234-5678
           </div>
         </div>

@@ -15,7 +15,7 @@ const Reviews = () => {
     }, []);
     return (
         <Fragment>
-            <div className={styles.reviews} style={{ '--background-image': `url('http://magento.loc/media/catalog/product/cache/f40c6f668743ff332496cd79549bd170/v/d/vdl01_main.jpg')`, backgroundPositionY: offsetY * 0.6 + 'px' }}>
+            <div className={styles.reviews} style={{ '--background-image': `url('http://magento.loc/media/catalog/product/cache/f40c6f668743ff332496cd79549bd170/v/d/vdl01_main.jpg')`, backgroundPositionY: offsetY * 0.8 + 'px' }}>
                 <div className={styles.cards}>
                 <div className={styles.cardReview}>
                     <img className={styles.cardImage} src='http://magento.loc/media/catalog/product/cache/f40c6f668743ff332496cd79549bd170/v/v/vvp01_main.jpg' alt='placeholder' />

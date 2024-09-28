@@ -64,4 +64,17 @@ module.exports = componentOverrideMapping = {
 
     [`${veniaUiPackagePath}/lib/components/ProductFullDetail/productFullDetail.js`]:'src/lib/components/ProductFullDetail/productFullDetail.js',
     [`${veniaUiPackagePath}/lib/components/ProductFullDetail/productFullDetail.module.css`]:'src/lib/components/ProductFullDetail/productFullDetail.module.css',
+
+    [`${veniaUiPackagePath}/lib/components/ProductImageCarousel/carousel.js`]:'src/lib/components/ProductImageCarousel/carousel.js',
+    [`${veniaUiPackagePath}/lib/components/ProductImageCarousel/carousel.module.css`]:'src/lib/components/ProductImageCarousel/carousel.module.css',
+    [`${veniaUiPackagePath}/lib/components/ProductImageCarousel/thumbnail.js`]:'src/lib/components/ProductImageCarousel/thumbnail.js',
+    [`${veniaUiPackagePath}/lib/components/ProductImageCarousel/thumbnail.module.css`]:'src/lib/components/ProductImageCarousel/thumbnail.module.css',
+
+    [`${veniaUiPackagePath}/lib/components/ProductOptions/option.js`]:'src/lib/components/ProductOptions/option.js',
+    [`${veniaUiPackagePath}/lib/components/ProductOptions/option.module.css`]:'src/lib/components/ProductOptions/option.module.css',
+
+    [`${veniaUiPackagePath}/lib/RootComponents/Category/category.module.css`]:'src/lib/RootComponents/Category/category.module.css',
+
+    [`${veniaUiPackagePath}/lib/components/Breadcrumbs/breadcrumbs.js`]:'src/lib/components/Breadcrumbs/breadcrumbs.js',
+    [`${veniaUiPackagePath}/lib/components/Breadcrumbs/breadcrumbs.module.css`]:'src/lib/components/Breadcrumbs/breadcrumbs.module.css',
 };
