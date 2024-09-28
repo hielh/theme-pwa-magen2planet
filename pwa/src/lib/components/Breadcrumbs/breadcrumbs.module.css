@@ -1,0 +1,38 @@
+.root {
+    /* Permanent height to prevent pop-in. */
+    composes: h-[2.5rem] from global;
+    /* composes: mt-xs from global; */
+    /* composes: ml-xs from global; */
+    /* Show ellipses when overflowing. */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 15px;
+    composes: overflow-hidden from global;
+    composes: overflow-ellipsis from global;
+    /* composes: pt-[0.625rem] from global;
+    composes: pb-[1rem] from global; */
+    composes: text-sm from global;
+    composes: whitespace-nowrap from global;
+    composes: -mb-[1rem] from global;
+}
+
+.container {
+    background-color: #f4f4f4;
+}
+
+.text {
+    composes: p-1 from global;
+}
+
+.divider {
+    composes: text;
+}
+
+.link {
+    composes: text;
+    color: #09c;
+}
+
+.currentCategory {
+    composes: text;
+}
