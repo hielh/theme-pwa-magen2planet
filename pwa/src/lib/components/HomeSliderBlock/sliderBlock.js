@@ -1,8 +1,9 @@
-import React, {Fragment, useEffect, useState, useRef} from 'react';
+import React, {Fragment, useEffect, useState, useRef, lazy, Suspense} from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { useCmsPage } from '@magento/peregrine/lib/talons/Cms/useCmsPage';
-import RichContent from '@magento/venia-ui/lib/components/RichContent';
-
+const RichContent = lazy(
+    () => import('@magento/venia-ui/lib/components/RichContent')
+)
 
 
 const SliderBlock = () => {
@@ -12,25 +13,20 @@ const SliderBlock = () => {
     const identifier = "news-test";
     const talonProps = useCmsPage({ identifier : identifier});
     const { cmsPage } = talonProps;
-    // console.log(talonProps);
-    // console.log(cmsPage, 'cmsPage');
 
     useEffect(() => {
-
         if(cmsPage) {
             setCms(cmsPage);
         }
-
-        // console.log(cmsPage.content);
-
     }, [cmsPage])
     
-    
-    
-
     return (
         <div className='SliderBlock-component' style={{maxWidth: '100vw', overflow: 'hidden'}}>
-            { cmsPage && <RichContent html={cmsPage.content} />}
+            { cmsPage &&
+            <Suspense fallback={"Loading..."}>
+                <RichContent html={cmsPage.content} />
+            </Suspense>
+            }
         </div>
     );
 };

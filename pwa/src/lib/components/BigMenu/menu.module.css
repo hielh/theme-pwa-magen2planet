@@ -4,6 +4,15 @@
     flex-basis: 300px;
     height: 48px;
 }
+.departementTitle {
+    margin-left: 0 5px;
+}
+.departementTitle:lang(ar) {
+    margin: 0 5px;
+}
+.departement:lang(ar) {
+    direction: rtl;
+}
 
 .departement:hover::before {
     content: '';
@@ -53,6 +62,10 @@
     padding: 10px 50px;
     border-left: 1px solid #e3e3e3;
 }
+.departementListItemMenu:lang(ar) {
+    right: 100%;
+    left: 0;
+}
 
 .departementListItem:hover .departementListItemMenu {
     display: block;
@@ -91,7 +104,7 @@
 
 .menu {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     align-items: center;
     justify-content: space-between;
     max-width: 1200px;
@@ -101,6 +114,9 @@
     position: relative;
     font-size: 15px;
     font-weight: bold;
+}
+.menu:lang(ar) {
+    flex-direction: row-reverse;
 }
 
 .menuContainer {
@@ -129,6 +145,9 @@
     align-items: center;
     padding: 0 10px;
     position: relative;
+}
+.menuItems:lang(ar) {
+    direction: rtl;
 }
 
 .menuItemSpan {
@@ -173,6 +192,9 @@
     left: 0;
     width: 200px;
     animation: slideUp 0.15s ease-in-out;
+}
+.submenuItems:lang(ar) {
+    right: 0;
 }
 
 .submenuItem {

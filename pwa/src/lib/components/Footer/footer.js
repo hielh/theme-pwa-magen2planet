@@ -21,6 +21,9 @@ const Footer = props => {
     const { formatMessage } = useIntl();
     const title = formatMessage({ id: 'logo.title', defaultMessage: 'Venia' });
 
+    const SafePayment = <FormattedMessage id="We Using Safe Payment For" defaultMessage="We Using Safe Payment For" />
+    const AllRights = <FormattedMessage id="All Rights Reserved" defaultMessage="All Rights Reserved" />
+
     const linkGroups = Array.from(links, ([groupKey, linkProps]) => {
         const linkElements = Array.from(linkProps, ([text, pathInfo]) => {
             let path = pathInfo;
@@ -96,11 +99,11 @@ const Footer = props => {
             <div className={classes.branding}>
                 <ul className={classes.legal}>
                     <li data-cy="Footer-terms" className={classes.terms}>
-                        We Using Safe Payment For
+                        {SafePayment}
                     </li>
                     <img src="https://martfury03.magebig.com/media/webps/png/media/wysiwyg/magebig/payment/payment.webp"></img>
                 </ul>
-                <p className={classes.copyright}>© 2024 Martfury. All Rights Reserved</p>
+                <p className={classes.copyright}>© {new Date().getFullYear()} Mage2Planet. {AllRights}</p>
             </div>
         </footer>
         </>

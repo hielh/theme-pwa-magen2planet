@@ -23,6 +23,15 @@ const Newsletter = props => {
     const { formatMessage } = useIntl();
     const classes = useStyle(defaultClasses, props.classes, testClasses, childsClasses);
     const talonProps = useNewsletter();
+    const newsletter = formatMessage({
+        id: 'NEWSLETTER',
+        defaultMessage: 'NEWSLETTER'
+    })
+
+    const emailMessage = formatMessage({
+        id: 'Enter your email here...',
+        defaultMessage: 'Enter your email here...'
+    })
     const [, { addToast }] = useToasts();
     const {
         isEnabled,
@@ -71,14 +80,14 @@ const Newsletter = props => {
         <div className={classes.root} data-cy={'Newsletter-root'}>
             {maybeLoadingIndicator}
             <span data-cy="Newsletter-title" className={classes.title}>
-            NEWSLETTER
+             {newsletter}
             </span>
 
             <p
                 data-cy="Newsletter-infoText"
                 className={classes.newsletter_text}
             >
-                Register now to get updates on promotions & coupons
+                <FormattedMessage id="Register now to get updates on promotions & coupons" defaultMessage="Register now to get updates on promotions & coupons" />
             </p>
             <FormError
                 allowErrorMessages
@@ -102,7 +111,7 @@ const Newsletter = props => {
                         autoComplete="email"
                         field="email"
                         id="email"
-                        placeholder="Enter your email here..."
+                        placeholder={emailMessage}
                         validate={isRequired}
                     />
                 </Field>
@@ -113,7 +122,7 @@ const Newsletter = props => {
                     disabled={isBusy}
                     onClick={clearErrors}
                 >
-                    Subscribe
+                    <FormattedMessage id="Subscribe" defaultMessage="Subscribe" />
                 </LinkButton>
             </Form>
         </div>

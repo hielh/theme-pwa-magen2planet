@@ -1,6 +1,9 @@
 .categoryContainer {
     /* padding: 20px; */
   }
+  .categoryContainer:lang(ar) {
+    direction: rtl;
+  }
   
   .categoryTitle {
     max-width: 1200px;
@@ -36,9 +39,13 @@
   }
   
   .categoryImage {
-    max-width: 130px;
+    /* max-width: 130px; */
+    width: 130px;
+    height: 130px;
+    object-fit: cover;
     margin: 0 auto;
-    height: auto;
+    margin-top: 23px;
+    /* height: auto; */
   }
   
   .categoryName {

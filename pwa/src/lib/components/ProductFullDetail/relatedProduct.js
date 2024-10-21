@@ -6,6 +6,7 @@ import AddToCartRelatedProduct from './addToCartRelatedProduct';
 import { Info, ShoppingBag, Eye, Heart, BarChart, ShoppingCart, Star } from 'react-feather';
 import { useAddToCartButton } from '@magento/peregrine/lib/talons/Gallery/useAddToCartButton';
 import ProductPopup from '../ProductsComponents/productpopup';
+import Rating from '../Rating/rating';
 
 
 
@@ -89,13 +90,7 @@ const RelatedProduct = (props) => {
                         <h2 className={styles.name}>{product.name}</h2>
                     </Link>
                     <div className={styles.footer}>
-                        <ul style={{display: 'flex'}}>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#dddddd' style={{color: '#dddddd'}}/> </li>
-                        </ul>
+                        <Rating rating={product.rating_summary} />
                         <span
                             className={styles.price}>${product.price_range.minimum_price.final_price.value.toFixed(2)}
                         </span>

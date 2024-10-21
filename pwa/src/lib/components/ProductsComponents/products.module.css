@@ -9,6 +9,9 @@
     margin-bottom: 10px;
     border-bottom: 1px solid rgba(0,0,0,.15);
 }
+.header:lang(ar) {
+    direction: rtl;
+}
 
 .headerH2 {
     font-size: 24px;
@@ -90,12 +93,18 @@
     text-align: left;
     z-index: 5;
 }
+.details:lang(ar) {
+    direction: rtl;
+}
 
 .name {
     font-size: 0.875rem;
     margin: 8px 0;
     color: #06c;
     composes: hover_text-green2 from global;
+}
+.name:lang(ar) {
+    text-align: right;
 }
 
 .footer {

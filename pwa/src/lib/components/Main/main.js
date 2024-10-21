@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { bool, shape, string } from 'prop-types';
 import { useScrollLock } from '@magento/peregrine';
 
@@ -8,7 +8,9 @@ import Header from '../Header';
 import MenuComponent from '../BigMenu/menu';
 import defaultClasses from './main.module.css';
 import HomeSlider from '../ProductsComponents/homeslider';
-import SliderBlock from '../HomeSliderBlock/sliderBlock';
+const SliderBlock = lazy(
+    () => import('../HomeSliderBlock/sliderBlock')
+)
 
 const Main = props => {
     const { children, isMasked } = props;
@@ -24,7 +26,11 @@ const Main = props => {
             <Header />
             <MenuComponent />
             {/* <HomeSlider/> */}
-            {window.location.pathname === "/" && <SliderBlock></SliderBlock> }
+            {window.location.pathname === "/" && 
+            <Suspense fallback={"Loading..."}>
+                <SliderBlock></SliderBlock> 
+            </Suspense>
+            }
             <div className={pageClass}>{children}</div>
             <Footer />
         </main>

@@ -21,6 +21,7 @@ import CustomAttributes from '@magento/venia-ui/lib/components/ProductFullDetail
 import defaultClasses from './productFullDetail.module.css';
 import { useGetRelatedProducts } from '../../customHooks/useGetRelatedProducts';
 import RelatedProducts from './relatedProducts';
+import Rating from '../Rating/rating';
 
 const WishlistButton = React.lazy(() => import('@magento/venia-ui/lib/components/Wishlist/AddToListButton'));
 const Options = React.lazy(() => import('@magento/venia-ui/lib/components/ProductOptions'));
@@ -61,7 +62,9 @@ const ProductFullDetail = props => {
         customAttributes,
         wishlistButtonProps
     } = talonProps;
-    console.log(customAttributes);
+    const params = new URLSearchParams(window.location.search);
+    const rateSum = params.get('rateSum'); // For a URL like /page?rateSum=60
+    // console.log(rateSum, 'The requested rate is');
     
 
     const { formatMessage } = useIntl();
@@ -243,6 +246,7 @@ const ProductFullDetail = props => {
     const [toggleDesc, setToggleDesc] = useState(true);
     const handleToggle = () => {
         setToggleDesc(!toggleDesc);
+    // console.log(product, 'productDetails');
     }
     
 
@@ -254,12 +258,8 @@ const ProductFullDetail = props => {
                 <div>
                     <p className={classes.headerTitle}>{productDetails.name}</p>
                     <ul style={{display: 'flex', }}>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#dddddd' style={{color: '#dddddd'}}/> </li>
-                    <span style={{marginLeft: '30px'}}>SKU: <span className={classes.sku}>{productDetails.sku}</span></span>
+                            <Rating rating={rateSum} />
+                    <span style={{marginLeft: '30px', marginRight: document.documentElement.lang.includes('ar') ? '30px' : '' }}>SKU: <span className={classes.sku}>{productDetails.sku}</span></span>
                     </ul>
                 </div>
                 {/* <p onClick={onClose} style={{cursor: 'pointer'}} ><X size={30} strokeWidth={1}/></p> */}
@@ -325,7 +325,7 @@ const ProductFullDetail = props => {
                             />
                         </span> */}
                         <div style={{ padding: '10px' }}>
-                        <span className={classes.productQuantity}>Quantity : </span>
+                        <span className={classes.productQuantity}><FormattedMessage id="Quantity :" defaultMessage="Quantity :" /></span>
                         <QuantityStepper
                             classes={{ root: classes.quantityRoot }}
                             min={1}
@@ -342,29 +342,29 @@ const ProductFullDetail = props => {
                             <div className={classes.method}>
                                 <Share className={classes.methodIcon}/>
                                 <div>
-                                    <h5 className={classes.sidebarHeaders}>Free Delivery</h5>
-                                    <p>For all oders over $99</p>
+                                    <h5 className={classes.sidebarHeaders}><FormattedMessage id="Free Delivery" defaultMessage="Free Delivery" /></h5>
+                                    <p><FormattedMessage id="For all oders over $99" defaultMessage="For all oders over $99" /></p>
                                 </div>
                             </div>
                             <div className={classes.method}>
                                 <RefreshCcw className={classes.methodIcon}/>
                                 <div>
-                                    <h5 className={classes.sidebarHeaders}>90 Days Return</h5>
-                                    <p>If goods have problems</p>
+                                    <h5 className={classes.sidebarHeaders}><FormattedMessage id="90 Days Return" defaultMessage="90 Days Return" /></h5>
+                                    <p><FormattedMessage id="If goods have problems" defaultMessage="If goods have problems" /></p>
                                 </div>
                             </div>
                             <div className={classes.method}>
                                 <CreditCard className={classes.methodIcon}/>
                                 <div>
-                                    <h5 className={classes.sidebarHeaders}>Secure Payment</h5>
-                                    <p>100% securepayment</p>
+                                    <h5 className={classes.sidebarHeaders}><FormattedMessage id="Secure Payment" defaultMessage="Secure Payment" /></h5>
+                                    <p><FormattedMessage id="100% secure payment" defaultMessage="100% secure payment" /></p>
                                 </div>
                             </div>
                             <div className={classes.method}>
                                 <MessageCircle className={classes.methodIcon}/>
                                 <div>
-                                    <h5 className={classes.sidebarHeaders}>24/7 Support</h5>
-                                    <p>Dedicated support</p>
+                                    <h5 className={classes.sidebarHeaders}><FormattedMessage id="24/7 Support" defaultMessage="24/7 Support" /></h5>
+                                    <p><FormattedMessage id="Dedicated support" defaultMessage="Dedicated support" /></p>
                                 </div>
                             </div>
                         </div>
@@ -372,7 +372,7 @@ const ProductFullDetail = props => {
                     {/* <div className={classes.offerTitle}> */}
                     <div className={classes.special}>
                         <div className={classes.specialHeading}>
-                            <h3 className={classes.specialTitle}>Special Offers</h3>
+                            <h3 className={classes.specialTitle}><FormattedMessage id="Special Offers" defaultMessage="Special Offers" /></h3>
                             <span className={classes.specialIcons}><ChevronLeft size={35} color='#e1e1e1' strokeWidth={1} /> <ChevronRight size={35} color='#e1e1e1' strokeWidth={1} /></span>
                         </div>
                         <div className={classes.specialBody}>
@@ -397,8 +397,8 @@ const ProductFullDetail = props => {
             </Form>
 
             <div className={classes.descriptionBarContainer}>
-                <div className={classes.reviewsBar}  onClick={handleToggle}>
-                    <h2 className={classes.descriptionBar}>Details</h2>
+                <div className={classes.reviewsBar} onClick={handleToggle}>
+                    <h2 className={classes.descriptionBar}><FormattedMessage id="Details" defaultMessage="Details" /></h2>
                     <span><ChevronDown size={25} strokeWidth={1} style={{rotate: toggleDesc ? '180deg' : ''}} /></span>
                 </div>
             </div>

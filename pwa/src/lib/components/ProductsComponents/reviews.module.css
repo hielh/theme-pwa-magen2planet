@@ -3,10 +3,12 @@
 .reviews {
   background-image: var(--background-image);
   background-size: cover;
-  background-position: center;
+  background-repeat: initial;
+  /* background-position: center; */
   background-attachment: scroll;
-  position: relative;
+  /* position: relative; */
   height: 500px;
+  top: 300px;
 }
 
 .cards {

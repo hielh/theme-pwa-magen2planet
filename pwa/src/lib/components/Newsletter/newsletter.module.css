@@ -16,6 +16,9 @@
     composes: grid from global;
     composes: relative from global;
 }
+.form:lang(ar) {
+    direction: ltr;
+}
 
 /* for the news letter input */
 .border {

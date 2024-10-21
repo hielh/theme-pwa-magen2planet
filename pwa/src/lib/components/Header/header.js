@@ -1,4 +1,4 @@
-import React, { Fragment, Suspense } from 'react';
+import React, { Fragment, Suspense, useState } from 'react';
 import { shape, string } from 'prop-types';
 import { Link, Route } from 'react-router-dom';
 
@@ -64,19 +64,43 @@ const Header = props => {
 
     const { formatMessage } = useIntl();
     const title = formatMessage({ id: 'logo.title', defaultMessage: 'Venia' });
+    const WelcomeMessage = formatMessage({ id: 'Welcome to Martfury Online Store !', defaultMessage: 'Welcome to Martfury Online Store !' });
+    const Location = formatMessage({ id: 'Store Location', defaultMessage: 'Store Location' });
+    const Track = formatMessage({ id: 'Track Order', defaultMessage: 'Track Order' });
+
+    const [selectedLanguage, setSelectedLanguage] = useState('English');
+    const languages = ['English', 'French', 'Arabic'];
+    const handleChange = (event) => {
+        setSelectedLanguage(event.target.value);
+    };
 
     return (
         <Fragment>
             <div className={classes.switchersContainer}>
-                <p className={classes.switchersContainerPara}>Welcome to Martfury Online Store ! </p>
-                <div className={classes.switchers} data-cy="Header-switchers">
-                    <div>Store Location</div>
-                    <div>Track Order</div>
+                <p className={classes.switchersContainerPara}>{WelcomeMessage}</p>
+                <div className={classes.switchers} data-cy="Header-switchers" style={{alignItems: 'center'}}>
+                    <div>{Location}</div>
+                    <div>{Track}</div>
                     <CurrencySwitcher />
-                    <div className={classes.toolbarLang}>
+                    {/* <div className={classes.toolbarLang}>
                         <img className="img-fluid" alt="en3" width="18" height="12" src="https://martfury03.magebig.com/media/webps/png/media/wysiwyg/magebig/languages/en3.webp" data-webp="1"></img>
                         English <ChevronDown size={15} />
-                    </div>
+                    </div> */}
+
+                    {/* <select
+                        id="language-select"
+                        value={selectedLanguage}
+                        onChange={handleChange}
+                        style={{padding: '5px'}}
+                    >
+                        {languages.map((language) => (
+                        <option key={language} value={language}>
+                            {language}
+                        </option>
+                        ))}
+                    </select> */}
+
+                    <StoreSwitcher/>
                 </div>
             </div>
             <section >

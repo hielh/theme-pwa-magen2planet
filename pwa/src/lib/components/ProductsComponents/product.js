@@ -10,6 +10,7 @@ import { useAddToCartButton } from '@magento/peregrine/lib/talons/Gallery/useAdd
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import Button from '@magento/venia-ui/lib/components/Button';
 import ProductPopup from './productpopup';
+import Rating from '../Rating/rating';
 
 
 const Product = (props) => {
@@ -40,7 +41,7 @@ const Product = (props) => {
     // console.log(storeConfig);
     const { name, price_range, image: { url: small_image }, url_key, rating_summary } = item;
     const { url: smallImageURL } = small_image;
-    const productLink = `/${url_key}${productUrlSuffix}`;
+    const productLink = `/${url_key}${productUrlSuffix}?rateSum=${item.rating_summary}`;
     const addButton =  (
         <AddToCartButton item={item} urlSuffix={productUrlSuffix} />
     ) ;
@@ -158,13 +159,7 @@ const Product = (props) => {
                         <h2 className={styles.name}>{name}</h2>
                     </Link>
                     <div className={styles.footer}>
-                        <ul style={{display: 'flex'}}>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#dddddd' style={{color: '#dddddd'}}/> </li>
-                        </ul>
+                        <Rating rating={item.rating_summary}/>
                         <span
                             className={styles.price}>${item.price_range.minimum_price.regular_price.value.toFixed(2)}
                         </span>

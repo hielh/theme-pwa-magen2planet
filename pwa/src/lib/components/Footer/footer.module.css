@@ -32,6 +32,9 @@
     composes: lg_text-base from global;
     composes: text-sm from global;
 }
+.links:lang(ar) {
+    direction: rtl;
+}
 
 .linkGroup {
     composes: col-span-3 from global;
@@ -40,6 +43,9 @@
     composes: grid from global;
 
     composes: xs_col-span-2 from global;
+}
+.linkGroup:lang(ar) {
+    direction: rtl;
 }
 
 .linkItem {
@@ -123,6 +129,9 @@
     composes: lg_justify-end from global;
     composes: lg_text-base from global;
     composes: text-sm from global;
+}
+.legal:lang(ar) {
+    direction: rtl;
 }
 
 .copyright {

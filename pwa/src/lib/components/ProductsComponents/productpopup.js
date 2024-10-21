@@ -10,6 +10,8 @@ import { AvailableShippingMethodsCartFragment } from '@magento/peregrine/lib/tal
 import ProductObject from '../TextInput/fileJSobject';
 import { useEventingContext } from '@magento/peregrine/lib/context/eventing';
 import { useAddToCartHook } from '../../customHooks/useAddToCartHook';
+import Rating from '../Rating/rating';
+import RichContent from '@magento/venia-ui/lib/components/RichContent';
 
 const ProductPopup = (props) => {
 
@@ -40,7 +42,7 @@ const ProductPopup = (props) => {
 
     
     useEffect(() => {
-        console.log(product, 'product');
+        // console.log(product, 'product');
         
         if(cartItems.length > 0) {
             let itemExist = cartItems.find(cartItem => cartItem.product.uid === product.uid);
@@ -154,13 +156,9 @@ const ProductPopup = (props) => {
             {/* start header */}
             <div className={styles.header}>
                 <div>
-                    <p className={styles.headerTitle}>Ocean Spray 100% Juice -10 Ounce Bottle</p>
+                    <p className={styles.headerTitle}>{product.name}</p>
                     <ul style={{display: 'flex', }}>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#ffcc00' style={{color: '#ffcc00'}}/> </li>
-                            <li> <Star size={15} fill='#dddddd' style={{color: '#dddddd'}}/> </li>
+                            <Rating rating={product.rating_summary} />
                     <span style={{marginLeft: '30px'}}>SKU: <span className={styles.sku}>{product.sku}</span></span>
                     </ul>
                 </div>
@@ -183,7 +181,7 @@ const ProductPopup = (props) => {
                 <div className={styles.details}>
                     <h2 className={styles.price}>${product.price_range.minimum_price.regular_price.value.toFixed(2)}</h2>
                     <span className={styles.status}>In stock</span>
-                    <p className={styles.desc}>Curabitur at lacus ac velit ornare lobortis. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum. Ut varius tincidunt libero.</p>
+                    <div className={styles.desc}> <RichContent html={product.description.html} /> </div>
                     <a href='#' className={styles.detailsLink}>see details...</a>
                     <div className={styles.cartDesc}>
                         <div className={styles.Quantity}>

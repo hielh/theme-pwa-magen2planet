@@ -9,7 +9,8 @@ import { useStyle } from '@magento/venia-ui/lib/classify';
 import Shimmer from '@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.shimmer';
 import defaultClasses from '@magento/venia-ui/lib/components/Breadcrumbs/breadcrumbs.module.css';
 
-const DELIMITER = '/';
+const language = document.documentElement.lang;
+const DELIMITER = language.includes('ar-SA') ? '\\' : '/';
 /**
  * Breadcrumbs! Generates a sorted display of category links.
  *
@@ -74,7 +75,7 @@ const Breadcrumbs = props => {
             to={resourceUrl(currentCategoryPath)}
             onClick={handleClick}
         >
-            {currentCategory}
+        <FormattedMessage id={currentCategory} defaultMessage={currentCategory} />
         </Link>
     ) : (
         <span className={classes.currentCategory}>{currentCategory}</span>
@@ -89,7 +90,7 @@ const Breadcrumbs = props => {
 
     return (
         <div className={classes.container}>
-            <div className={classes.root} aria-live="polite" aria-busy="false">
+            <div className={classes.root} style={{direction: language.includes('ar-') ? 'rtl': 'ltr'}} aria-live="polite" aria-busy="false">
                 <Link className={classes.link} to="/">
                     <FormattedMessage id={'global.home'} defaultMessage={'Home'} />
                 </Link>

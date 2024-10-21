@@ -8,6 +8,7 @@ import { useProductListing } from '@magento/peregrine/lib/talons/CartPage/Produc
 import { useGallery } from '@magento/peregrine/lib/talons/Gallery/useGallery';
 import Reviews from './reviews';
 import { ChevronLeft, ChevronRight } from 'react-feather';
+import { FormattedMessage } from 'react-intl';
 
 
 const RELATED_PRODUCTS = gql`
@@ -22,6 +23,9 @@ const RELATED_PRODUCTS = gql`
                 name
                 stock_status
                 url_key
+                description {
+                    html
+                }
                 price_range {
                     minimum_price {
                         regular_price {
@@ -37,6 +41,7 @@ const RELATED_PRODUCTS = gql`
                 thumbnail {
                     url
                 }
+                rating_summary
             }
             upsell_products {
                 uid
@@ -44,6 +49,9 @@ const RELATED_PRODUCTS = gql`
                 sku
                 stock_status
                 url_key
+                description {
+                    html
+                }
                 price_range {
                     minimum_price {
                         regular_price {
@@ -59,6 +67,7 @@ const RELATED_PRODUCTS = gql`
                 thumbnail {
                     url
                 }
+                rating_summary
             }
             crosssell_products {
                 uid
@@ -66,6 +75,9 @@ const RELATED_PRODUCTS = gql`
                 sku
                 stock_status
                 url_key
+                description {
+                    html
+                }
                 price_range {
                     minimum_price {
                         regular_price {
@@ -81,6 +93,7 @@ const RELATED_PRODUCTS = gql`
                 thumbnail {
                     url
                 }
+                rating_summary
             }
             }
         }
@@ -144,7 +157,7 @@ const RelatedProducts = (props) => {
             {relatedProducts?.products?.items[0]?.related_products.length > 0 && 
             <div className={styles.headingWrapper}>
                 <div className={styles.headingTitle}>
-                    <h2 className={styles.relatedHeading}>Related Products</h2>
+                    <h2 className={styles.relatedHeading}><FormattedMessage id="Related Products" defaultMessage="Related Products" /></h2>
                         <button className={styles.preBtn} onClick={() => btnPressPrev(relatedContainerRef)}><ChevronLeft size={50} strokeWidth={1} color='#ccc' /></button>
                         <button className={styles.nextBtn} onClick={() => btnPressNext(relatedContainerRef)}><ChevronRight size={50} strokeWidth={1} color='#ccc' /></button>
                 </div>
@@ -168,7 +181,7 @@ const RelatedProducts = (props) => {
             {relatedProducts?.products?.items[0]?.upsell_products.length > 0 && 
             <div className={styles.headingWrapper}>
                 <div style={{marginTop: '50px'}} className={styles.headingTitle}>
-                    <h2 className={styles.relatedHeading}>Upsell Products</h2>
+                    <h2 className={styles.relatedHeading}><FormattedMessage id="Upsell Products" defaultMessage="Upsell Products" /></h2>
                         <button className={styles.preBtn} onClick={() =>  btnPressPrev(upsellContainerRef)}><ChevronLeft size={50} strokeWidth={1} color='#ccc' /></button>
                         <button className={styles.nextBtn} onClick={() => btnPressNext(upsellContainerRef)}><ChevronRight size={50} strokeWidth={1} color='#ccc' /></button>
                 </div>
@@ -192,7 +205,7 @@ const RelatedProducts = (props) => {
             {relatedProducts?.products?.items[0]?.crosssell_products.length > 0 && 
                 <div className={styles.headingWrapper}>
                     <div style={{marginTop: '50px'}} className={styles.headingTitle}>
-                        <h2 className={styles.relatedHeading}>CrossSell Products</h2>
+                        <h2 className={styles.relatedHeading}><FormattedMessage id="CrossSell Products" defaultMessage="CrossSell Products" /></h2>
                             <button className={styles.preBtn} onClick={() => btnPressPrev(crossSellContainerRef)}><ChevronLeft size={50} strokeWidth={1} color='#ccc' /></button>
                             <button className={styles.nextBtn} onClick={() => btnPressNext(crossSellContainerRef)}><ChevronRight size={50} strokeWidth={1} color='#ccc' /></button>
                     </div>

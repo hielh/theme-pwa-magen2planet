@@ -77,4 +77,7 @@ module.exports = componentOverrideMapping = {
 
     [`${veniaUiPackagePath}/lib/components/Breadcrumbs/breadcrumbs.js`]:'src/lib/components/Breadcrumbs/breadcrumbs.js',
     [`${veniaUiPackagePath}/lib/components/Breadcrumbs/breadcrumbs.module.css`]:'src/lib/components/Breadcrumbs/breadcrumbs.module.css',
+
+
+    [`${veniaUiPackagePath}/lib/components/App/localeProvider.js`]:'src/lib/components/App/localeProvider.js',
 };

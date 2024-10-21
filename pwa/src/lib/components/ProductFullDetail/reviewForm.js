@@ -6,6 +6,7 @@ import { gql, useQuery, useMutation } from '@apollo/client';
 import DEFAULT_OPERATIONS from './reviewfromsubmission.gql';
 import mergeOperations from "@magento/peregrine/lib/util/shallowMerge";
 import {useFormState} from "informed";
+import { FormattedMessage } from 'react-intl';
 
 const colors = {
   orange: "#ffcc00",
@@ -77,7 +78,7 @@ const ReviewForm = (props) => {
     e.preventDefault();
     if (validate()) {
       try{
-          console.log(formData);
+          // console.log(formData);
           await createProductReview({ 
             variables:{
               sku: props.sku,
@@ -108,9 +109,9 @@ const ReviewForm = (props) => {
   }
 
     useEffect(() => {
-        console.log(createAccount, 'data from product review useEffect before data');
+        // console.log(createAccount, 'data from product review useEffect before data');
       if (createAccount) {
-        console.log(operations, 'operations from product review useEffect');
+        // console.log(operations, 'operations from product review useEffect');
       }
     }, [createAccount])
     
@@ -145,7 +146,7 @@ const ReviewForm = (props) => {
         <div style={{width: '150px'}}>
             {/* <RatingComponent /> */}
             <div>
-            <label className={styles.inputGroupLabel} htmlFor="input2">Your Rating</label>
+            <label className={styles.inputGroupLabel} htmlFor="input2"><FormattedMessage id="Your Rating" defaultMessage="Your Rating" /></label>
               <ul className={styles.stars}>
               {stars.map((star, index) => {
                 return (
@@ -169,7 +170,7 @@ const ReviewForm = (props) => {
         <form  onSubmit={handleSubmit} className={styles.formContainer}>
             <div className={styles.inputRow}>
                 <div className={styles.inputGroup}>
-                <label className={styles.inputGroupLabel} htmlFor="nickname">Nickname </label>
+                <label className={styles.inputGroupLabel} htmlFor="nickname"> <FormattedMessage id="Nickname" defaultMessage="Nickname" /> </label>
                 <input
                     type="text"
                     id="nickname"
@@ -183,7 +184,7 @@ const ReviewForm = (props) => {
                 {errors.nickname && <span className={styles.error}>{errors.nickname}</span>}
                 </div>
                 <div className={styles.inputGroup}>
-                <label className={styles.inputGroupLabel} htmlFor="summary">Summary</label>
+                <label className={styles.inputGroupLabel} htmlFor="summary"><FormattedMessage id="Summary" defaultMessage="Summary" /></label>
                 <input
                     type="text"
                     id="summary"
@@ -198,7 +199,7 @@ const ReviewForm = (props) => {
                 </div>
             </div>
             <div className={styles.textAreaGroup}>
-                <label className={styles.textAreaGroupLabel} htmlFor="review">Review</label>
+                <label className={styles.textAreaGroupLabel} htmlFor="review"><FormattedMessage id="Review" defaultMessage="Review" /></label>
                 <textarea
                     id="review"
                     name="review"
@@ -214,7 +215,7 @@ const ReviewForm = (props) => {
               type="submit"
               onClick={handleSubmit}
             >
-                Submit Review
+                <FormattedMessage id="Submit Review" defaultMessage="Submit Review" />
             </button>
         </form>
     </div>

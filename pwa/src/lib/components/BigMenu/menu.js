@@ -7,23 +7,10 @@ import { useIsInViewport } from '@magento/peregrine/lib/hooks/useIsInViewport';
 import NavTrigger from '../Header/navTrigger';
 import { RefreshCw, Airplay, Radio, Wind, Aperture, Headphones, Smile, Activity, PhoneCall, Heart, Book, ChevronRight} from 'react-feather';
 import SidebarCategories from '../SidebarCategories/sidebarCategories';
+import { FormattedMessage } from 'react-intl';
 
 
 const MenuComponent = () => {
-
-  const categories = [
-    { title: 'Consumer Electric', icon: <RefreshCw size={20} /> },
-    { title: 'Organic', icon: <Airplay size={20} /> },
-    { title: 'Home, Garden & Kitchen', icon: <Radio size={20} /> },
-    { title: 'Clothing & Apparel', icon: <Wind size={20} /> },
-    { title: 'Jewelry & Watches', icon: <Aperture size={20} /> },
-    { title: 'Computers & Technologies', icon: <Headphones size={20} /> },
-    { title: 'Babies & Moms', icon: <Smile size={20} /> },
-    { title: 'Sport & Outdoor', icon: <Activity size={20} /> },
-    { title: 'Phones & Accessories', icon: <PhoneCall size={20} /> },
-    { title: 'Health & Beauty', icon: <Heart size={20} /> },
-    { title: 'Books & Office', icon: <Book size={20} /> }
-  ];
 
   const mainNavRef = useRef(null);
   const {
@@ -68,6 +55,8 @@ const MenuComponent = () => {
     document.querySelector(`.${styles.menuContainer}`).classList.remove(styles.hovered);
   };
 
+  const Departement = <FormattedMessage id="Shop By Departement" defaultMessage="Shop By Departement" />
+
   return (
     <>
       <div className={styles.menuContainer}>
@@ -76,42 +65,12 @@ const MenuComponent = () => {
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}>
             <Menu />
-            <h5>Shop By Departement</h5>
+            <h5 className={styles.departementTitle}>{Departement}</h5>
             <ChevronDown size={16} />
 
             <SidebarCategories
               styles={styles}>
             </SidebarCategories>
-
-            {/* <ul className={styles.departementList}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}>
-                {categories.map((option, optIndex) => (
-                    <li key={optIndex} className={styles.departementListItem} > 
-                      <div className={styles.sideMenuItem}>
-                        {option.icon} 
-                        <a style={{marginLeft: '10px'}} href="#">{option.title}</a>
-                      </div>
-                      {optIndex % 2 === 0 && (
-                        <div>
-                          <ChevronRight size={20} />
-                        </div>
-                      )}
-                      <div className={styles.departementListItemMenu}>
-                        <ul className={styles.categories}>
-                          <li className={styles.categoryItem}>Bright stars fill sky</li>
-                          <li className={styles.categoryItem}>Quiet moments bring clarity</li>
-                          <li className={styles.categoryItem}>Dreams turn into reality</li>
-                          <li className={styles.categoryItem}>Soft whispers of evening</li>
-                          <li className={styles.categoryItem}>Fresh breeze through window</li>
-                          <li className={styles.categoryItem}>Laughter echoes through halls</li>
-                          <li className={styles.categoryItem}>Simple joys bring happiness</li>
-                          <li className={styles.categoryItem}>New adventures await you</li>
-                      </ul>
-                      </div>
-                    </li>
-                ))}
-            </ul> */}
           </div>
           <div className={styles.mainMenu}>  <NavTrigger />
             { shouldRenderItems && megaMenuData.children && <ul className={styles.menuItems} ref={mainNavRef} >
@@ -126,7 +85,7 @@ const MenuComponent = () => {
                     onClick={handleNavigate}
                     to={`/${item.url_path}${categoryUrlSuffix || ''}`}
                     > 
-                    {item.name} 
+                     <FormattedMessage id={item.name} defaultMessage={item.name} />
                   </Link>
                   { item?.children.length > 0 && <ChevronDown size={16} />}
                   <ul className={styles.submenuItems}>
@@ -137,7 +96,7 @@ const MenuComponent = () => {
                       to={`/${option.url_path}${categoryUrlSuffix || ''}`}
                     >
                       <li className={styles.submenuItem}>
-                        {option.name}
+                        <FormattedMessage id={option.name} defaultMessage={option.name} />
                         </li>
                     </Link>
                     ))}
@@ -148,7 +107,7 @@ const MenuComponent = () => {
           </div>
           <div className={styles.phone}>
             <Phone size={17} strokeWidth={1} style={{marginRight: '10px'}} />
-            Hoteline: 1-800-234-5678
+            <FormattedMessage id="Hoteline" defaultMessage="Hoteline" />: 1-800-234-5678
           </div>
         </div>
       </div>

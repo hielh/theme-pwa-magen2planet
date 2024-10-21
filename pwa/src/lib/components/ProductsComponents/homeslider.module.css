@@ -10,24 +10,24 @@
 }
 
 .bannerRoot {
-    /* composes: root from '@magento/pagebuilder/lib/ContentTypes/Banner/banner.module.css'; */
-    /* min-height: inherit; */
+    composes: root from '@magento/pagebuilder/lib/ContentTypes/Banner/banner.module.css';
+    min-height: inherit;
 }
 .bannerLink {
-    /* composes: link from '@magento/pagebuilder/lib/ContentTypes/Banner/banner.module.css'; */
-    /* min-height: inherit; */
+    composes: link from '@magento/pagebuilder/lib/ContentTypes/Banner/banner.module.css';
+    min-height: inherit;
 }
 .bannerWrapper {
-    /* composes: wrapper from '@magento/pagebuilder/lib/ContentTypes/Banner/banner.module.css'; */
-    /* min-height: inherit; */
+    composes: wrapper from '@magento/pagebuilder/lib/ContentTypes/Banner/banner.module.css';
+    min-height: inherit;
 }
 .bannerPosterOverlay {
-    /* composes: posterOverlay from '@magento/pagebuilder/lib/ContentTypes/Banner/banner.module.css'; */
-    /* min-height: inherit; */
+    composes: posterOverlay from '@magento/pagebuilder/lib/ContentTypes/Banner/banner.module.css';
+    min-height: inherit;
 }
 
 .root :global .slick-slider {
-    /* min-height: inherit; */
+    min-height: inherit;
 }
 
 .root :global .slick-list {
@@ -36,7 +36,7 @@
     overflow: hidden;
     padding: 0;
     position: relative;
-    /* min-height: inherit; */
+    min-height: inherit;
 }
 
 .root :global .slick-list:focus {
@@ -55,7 +55,6 @@
     position: relative;
     top: 0;
     min-height: inherit;
-    height: 370px;  /* this is the height of the slider */
 }
 
 .root :global .slick-track .slick-slide > div {
@@ -79,7 +78,7 @@
 .root :global .slick-slide {
     display: none;
     float: left;
-     height: 100%;   /* this is to fix a problem with the height */   
+    height: 100%;
     min-height: inherit;
 }
 
@@ -168,7 +167,7 @@
 }
 
 .root :global .slick-dots {
-    /* display: none !important; */
+    display: block;
     list-style: none;
     margin: 0;
     padding: 20px 0 18px 0;

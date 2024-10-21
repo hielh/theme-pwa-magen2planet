@@ -1,8 +1,9 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {gql, useQuery} from '@apollo/client';
 import styles from '../BigMenu/menu.module.css';
-import { Airplay, ChevronRight} from 'react-feather';
+import { Airplay, ChevronRight, ChevronLeft} from 'react-feather';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 
 
@@ -40,15 +41,10 @@ const SidebarCategories = (props) => {
   `;
 
     const { error, loading, data: sidebarCategoriesData } = useQuery(CategoryListingFragment, {
-        variables: { ids: [8, 11, 14, 3, 15, 7], parentId: ["2"] },
+        variables: { ids: [8, 11, 14, 3, 15, 7, 38, 20, 9, 29, 37], parentId: ["2"] },
         fetchPolicy: 'cache-and-network',
         nextFetchPolicy: 'cache-first'
     });
-
-
-    useEffect(() => {
-        console.log(sidebarCategoriesData, 'CategoryListingFragment');
-    },[sidebarCategoriesData]);
 
 
 
@@ -71,11 +67,11 @@ const SidebarCategories = (props) => {
             {sidebarCategoriesData.categoryList.map((item, optIndex) => (
                 <li key={optIndex}  className={props.styles.departementListItem} > 
                     <div className={props.styles.sideMenuItem}>
-                    <a style={{marginLeft: '10px'}} href="#">{item.name}</a>
+                    <a style={{marginLeft: '10px'}} href="#"><FormattedMessage id={item.name} defaultMessage={item.name} /></a>
                     </div>
                     {item.children.length > 0 && (
                         <div>
-                            <ChevronRight size={20} />
+                            {document.documentElement.lang.includes('ar') ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
                         </div>
                     )}
                     { item.children.length > 0 && <div className={props.styles.departementListItemMenu}>
@@ -86,7 +82,7 @@ const SidebarCategories = (props) => {
                         to={`/${option.url_path}${'.html' || ''}`}
                       >
                             <li className={props.styles.categoryItem}>
-                                {option.name}
+                               <FormattedMessage id={option.name} defaultMessage={option.name} />
                             </li>
                       </Link>
                             ))}

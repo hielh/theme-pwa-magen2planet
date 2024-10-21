@@ -26,6 +26,11 @@
     composes: text-center from global;
     composes: md_text-left from global;
 }
+.featuresItem:lang(ar) {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
 .grey {
     composes: text-gray-500 from global;
     font-size: 14px;

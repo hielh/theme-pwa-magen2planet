@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useRef } from 'react';
 import { node, shape, string } from 'prop-types';
 import { Text as InformedText } from 'informed';
 import useFieldState from '@magento/peregrine/lib/hooks/hook-wrappers/useInformedFieldStateWrapper';
@@ -17,6 +17,21 @@ const TextInput = props => {
         message,
         ...rest
     } = props;
+
+    const inputRef = useRef(null);
+    useEffect(() => {
+        if (inputRef.current) {
+            inputRef.current.focus();
+          }
+        const timer = setTimeout(() => {
+            if (inputRef.current) {
+              inputRef.current.blur();
+              window.scrollTo(0, 0)
+            }
+          }, 100); // Adjust the delay as needed
+          return () => clearTimeout(timer);
+    }, [])
+    
     const fieldState = useFieldState(field);
     const classes = useStyle(defaultClasses, propClasses);
     var inputClass =
@@ -25,7 +40,7 @@ const TextInput = props => {
     return (
         <Fragment>
             <FieldIcons after={after} before={before}>
-                <InformedText {...rest} className={inputClass} field={field} />
+                <InformedText ref={inputRef}  {...rest} className={inputClass} field={field} />
             </FieldIcons>
             <Message fieldState={fieldState}>{message}</Message>
         </Fragment>

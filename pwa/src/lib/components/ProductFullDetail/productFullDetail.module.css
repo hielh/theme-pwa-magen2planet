@@ -261,6 +261,9 @@
     position: relative;
     cursor: pointer;
 }
+.reviewsBar:lang(ar) {
+    direction: rtl;
+}
 
 .reviewsBar::before {
     content: '';
@@ -288,6 +291,9 @@
     align-items: center;
     padding-bottom: 10px;
     border-bottom: 1px solid #e1e1e1;
+}
+.header:lang(ar) {
+    direction: rtl;
 }
 
 .headerTitle {
@@ -328,10 +334,17 @@
   align-items: center;
   margin-bottom: 15px;
 }
+.method:lang(ar) {
+    direction: rtl;
+}
 
 .methodIcon {
   margin-right: 10px;
   color: var(--global-green);
+}
+.methodIcon:lang(ar) {
+  margin-left: 10px;
+  margin-right: 0;
 }
 
 .sidebarHeaders {
@@ -378,6 +391,9 @@
     border-bottom: 1px solid #e1e1e1;
     padding-top: 10px;
 }
+.specialHeading:lang(ar) {
+    flex-direction: row-reverse;
+}
 
 .specialTitle {
     font-size: 17px;
@@ -394,6 +410,10 @@
     max-width: 50px;
     margin-right: 20px;
 }
+.specialimage:lang(ar) {
+    margin-left: 20px;
+    margin-right: 0;
+}
 
 .specialBody {
     display: flex;
@@ -406,6 +426,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.specialOffer:lang(ar) {
+    direction: rtl;
 }
 
 .offerTitle {
